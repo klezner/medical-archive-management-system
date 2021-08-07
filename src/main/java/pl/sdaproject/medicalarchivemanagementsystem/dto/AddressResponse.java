@@ -1,4 +1,4 @@
-package pl.sdaproject.medicalarchivemanagementsystem.mapper;
+package pl.sdaproject.medicalarchivemanagementsystem.dto;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -7,6 +7,7 @@ import lombok.Getter;
 @Builder
 public class AddressResponse {
 
+    private Long id;
     private String street;
     private String number;
     private String city;
