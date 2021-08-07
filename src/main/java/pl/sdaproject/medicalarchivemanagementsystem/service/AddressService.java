@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import pl.sdaproject.medicalarchivemanagementsystem.model.Address;
 import pl.sdaproject.medicalarchivemanagementsystem.repository.AddressRepository;
 
+import java.util.NoSuchElementException;
+
 @Service
 @RequiredArgsConstructor
 public class AddressService {
@@ -20,5 +22,10 @@ public class AddressService {
                 .build();
 
         return addressRepository.save(address);
+    }
+
+    public Address fetchAddress(Long id) {
+
+        return addressRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Address with id: " + id + " not found"));
     }
 }

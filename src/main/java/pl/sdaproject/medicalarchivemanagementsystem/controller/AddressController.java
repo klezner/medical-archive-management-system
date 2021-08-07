@@ -3,10 +3,7 @@ package pl.sdaproject.medicalarchivemanagementsystem.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.sdaproject.medicalarchivemanagementsystem.dto.AddressRequest;
 import pl.sdaproject.medicalarchivemanagementsystem.dto.AddressResponse;
 import pl.sdaproject.medicalarchivemanagementsystem.mapper.AddressMapper;
@@ -33,6 +30,15 @@ public class AddressController {
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
+                .body(addressMapper.mapAddressToAddressResponse(address));
+    }
+
+    @GetMapping(path = "/{id}")
+    public ResponseEntity<AddressResponse> getAddress(@PathVariable Long id) {
+        final Address address = addressService.fetchAddress(id);
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
                 .body(addressMapper.mapAddressToAddressResponse(address));
     }
 }
