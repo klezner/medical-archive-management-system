@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.sdaproject.medicalarchivemanagementsystem.dto.AddressRequest;
+import pl.sdaproject.medicalarchivemanagementsystem.dto.AddressResponse;
 import pl.sdaproject.medicalarchivemanagementsystem.mapper.AddressMapper;
-import pl.sdaproject.medicalarchivemanagementsystem.mapper.AddressResponse;
 import pl.sdaproject.medicalarchivemanagementsystem.model.Address;
 import pl.sdaproject.medicalarchivemanagementsystem.service.AddressService;
 

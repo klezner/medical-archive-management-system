@@ -18,7 +18,7 @@ public class AddressRequest {
     @NotNull
     private String city;
     @NotNull
-    @Length(min = 6, max = 6)
-    @Pattern(regexp = "[0-9]{2}-[0-9]{3}")
+    @Length(min = 6, max = 6, message = "Wrong zipCode length")
+    @Pattern(regexp = "[0-9]{2}-[0-9]{3}", message = "wrong zipCode format")
     private String zipCode;
 }
