@@ -23,7 +23,7 @@ public class Location {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotBlank
-    @Pattern(regexp = "[0-9]+")
+    @Pattern(regexp = "[0-9]{1,3}")
     private String roomNumber;
     @NotNull
     private Integer floor;

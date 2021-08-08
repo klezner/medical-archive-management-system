@@ -11,7 +11,7 @@ import javax.validation.constraints.Pattern;
 @Builder
 public class LocationRequest {
     @NotBlank
-    @Pattern(regexp = "[0-9]+")
+    @Pattern(regexp = "[0-9]{1,3}")
     private String roomNumber;
     @NotNull
     private Integer floor;
