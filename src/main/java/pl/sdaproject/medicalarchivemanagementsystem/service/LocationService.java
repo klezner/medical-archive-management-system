@@ -12,7 +12,7 @@ import java.util.NoSuchElementException;
 public class LocationService {
     private final LocationRepository locationRepository;
 
-    public Location createLocation(Integer roomNumber, Integer floor) {
+    public Location createLocation(String roomNumber, Integer floor) {
         final Location location = Location.builder()
                 .roomNumber(roomNumber)
                 .floor(floor)

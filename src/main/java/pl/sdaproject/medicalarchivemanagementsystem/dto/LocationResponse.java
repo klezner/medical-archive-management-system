@@ -7,6 +7,6 @@ import lombok.Getter;
 @Builder
 public class LocationResponse {
     private Long id;
-    private Integer roomNumber;
+    private String roomNumber;
     private Integer floor;
 }
