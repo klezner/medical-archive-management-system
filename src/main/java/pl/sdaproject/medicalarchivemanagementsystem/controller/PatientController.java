@@ -3,10 +3,7 @@ package pl.sdaproject.medicalarchivemanagementsystem.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.sdaproject.medicalarchivemanagementsystem.dto.PatientRequest;
 import pl.sdaproject.medicalarchivemanagementsystem.dto.PatientResponse;
 import pl.sdaproject.medicalarchivemanagementsystem.mapper.PatientMapper;
@@ -33,6 +30,15 @@ public class PatientController {
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
+                .body(patientMapper.mapPatientToPatientResponse(patient));
+    }
+
+    @GetMapping(path = "/{id}")
+    public ResponseEntity<PatientResponse> getPatient(@PathVariable Long id) {
+        final Patient patient = patientService.fetchPatient(id);
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
                 .body(patientMapper.mapPatientToPatientResponse(patient));
     }
 }

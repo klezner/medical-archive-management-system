@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import pl.sdaproject.medicalarchivemanagementsystem.model.Patient;
 import pl.sdaproject.medicalarchivemanagementsystem.repository.PatientRepository;
 
+import java.util.NoSuchElementException;
+
 @Service
 @RequiredArgsConstructor
 public class PatientService {
@@ -19,5 +21,10 @@ public class PatientService {
                 .build();
 
         return patientRepository.save(patient);
+    }
+
+    public Patient fetchPatient(Long id) {
+
+        return patientRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Patient with id: " + id + " not found"));
     }
 }
