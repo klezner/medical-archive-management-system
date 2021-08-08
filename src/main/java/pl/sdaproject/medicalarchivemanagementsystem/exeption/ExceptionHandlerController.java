@@ -1,4 +1,4 @@
-package pl.sdaproject.medicalarchivemanagementsystem.exception;
+package pl.sdaproject.medicalarchivemanagementsystem.exeption;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -13,12 +13,6 @@ import java.util.NoSuchElementException;
 @Slf4j
 public class ExceptionHandlerController {
 
-    @ExceptionHandler(HospitalizationDateException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public void handleHospitalizationDateException(HospitalizationDateException e) {
-        log.warn(e.getMessage());
-    }
-        
     @ExceptionHandler(ConstraintViolationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public void handleConstraintViolationException(ConstraintViolationException e) {
