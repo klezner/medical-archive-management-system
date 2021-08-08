@@ -22,9 +22,7 @@ public class Location {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotBlank
-    @Length(min = 1)
     private Integer roomNumber;
     @NotBlank
-    @Length(min = 1)
     private Integer floor;
 }

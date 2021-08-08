@@ -10,9 +10,7 @@ import javax.validation.constraints.NotBlank;
 @Builder
 public class LocationRequest {
     @NotBlank
-    @Length(min = 1)
     private Integer roomNumber;
     @NotBlank
-    @Length(min = 1)
     private Integer floor;
 }
