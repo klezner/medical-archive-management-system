@@ -3,18 +3,16 @@ package pl.sdaproject.medicalarchivemanagementsystem.dto;
 import lombok.Builder;
 import lombok.Getter;
 
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 @Getter
 @Builder
-public class ArchiveCategoryRequest {
+public class LocationRequest {
     @NotBlank
-    @Pattern(regexp = "[A-Z]+")
-    private String categoryName;
+    @Pattern(regexp = "[0-9]{1,3}")
+    private String roomNumber;
     @NotNull
-    @Min(1)
-    private Integer storagePeriodYears;
+    private Integer floor;
 }

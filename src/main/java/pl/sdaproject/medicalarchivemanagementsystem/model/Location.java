@@ -1,10 +1,14 @@
 package pl.sdaproject.medicalarchivemanagementsystem.model;
 
-import lombok.*;
-import org.hibernate.validator.constraints.Length;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-import javax.validation.constraints.Min;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -14,14 +18,13 @@ import javax.validation.constraints.Pattern;
 @NoArgsConstructor
 @Builder
 @Getter
-public class ArchiveCategory {
+public class Location {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotBlank
-    @Pattern(regexp = "[A-Z]+")
-    private String categoryName;
+    @Pattern(regexp = "[0-9]{1,3}")
+    private String roomNumber;
     @NotNull
-    @Min(1)
-    private Integer storagePeriodYears;
+    private Integer floor;
 }

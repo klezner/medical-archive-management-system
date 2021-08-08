@@ -5,8 +5,8 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class ArchiveCategoryResponse {
+public class LocationResponse {
     private Long id;
-    private String categoryName;
-    private Integer storagePeriodYears;
+    private String roomNumber;
+    private Integer floor;
 }
