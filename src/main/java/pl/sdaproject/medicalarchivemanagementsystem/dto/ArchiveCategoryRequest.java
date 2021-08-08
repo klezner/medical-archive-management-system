@@ -5,6 +5,7 @@ import lombok.Getter;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 @Getter
@@ -13,8 +14,7 @@ public class ArchiveCategoryRequest {
     @NotBlank
     @Pattern(regexp = "[A-Z]+")
     private String categoryName;
-    @NotBlank
+    @NotNull
     @Min(1)
-    @Pattern(regexp = "[0-9]+")
     private Integer storagePeriodYears;
 }
