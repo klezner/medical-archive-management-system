@@ -10,7 +10,7 @@ public class ArchiveCategoryMapper {
     public ArchiveCategoryResponse mapArchiveCategoryToArchiveCategoryResponse(ArchiveCategory archiveCategory) {
 
         return ArchiveCategoryResponse.builder()
-                .archiveCategory(archiveCategory.getArchiveCategory())
+                .categoryName(archiveCategory.getCategoryName())
                 .storagePeriodYears(archiveCategory.getStoragePeriodYears())
                 .build();
     }

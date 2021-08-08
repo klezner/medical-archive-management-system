@@ -2,17 +2,19 @@ package pl.sdaproject.medicalarchivemanagementsystem.dto;
 
 import lombok.Builder;
 import lombok.Getter;
-import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 @Getter
 @Builder
 public class ArchiveCategoryRequest {
     @NotBlank
-    @Length(min = 1)
-    private String archiveCategory;
+    @Pattern(regexp = "[A-Z]+")
+    private String categoryName;
     @NotBlank
-    @Length(min = 1)
+    @Min(1)
+    @Pattern(regexp = "[0-9]+")
     private Integer storagePeriodYears;
 }

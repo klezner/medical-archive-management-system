@@ -16,7 +16,7 @@ public class ArchiveCategoryService {
 
     public ArchiveCategory createArchiveCategory(String category, Integer years) {
         final ArchiveCategory archiveCategory = ArchiveCategory.builder()
-                .archiveCategory(category)
+                .categoryName(category)
                 .storagePeriodYears(years)
                 .build();
 

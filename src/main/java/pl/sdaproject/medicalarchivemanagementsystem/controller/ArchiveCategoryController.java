@@ -23,7 +23,7 @@ public class ArchiveCategoryController {
     @PostMapping
     public ResponseEntity<ArchiveCategoryResponse> addArchiveCategory(@RequestBody @Valid ArchiveCategoryRequest request) {
         final ArchiveCategory archiveCategory = archiveCategoryService.createArchiveCategory(
-                request.getArchiveCategory(),
+                request.getCategoryName(),
                 request.getStoragePeriodYears());
         return ResponseEntity
                 .status(HttpStatus.CREATED)
