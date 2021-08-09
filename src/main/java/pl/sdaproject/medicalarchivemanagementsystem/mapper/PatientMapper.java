@@ -14,6 +14,10 @@ public class PatientMapper {
                 .firstName(patient.getFirstName())
                 .lastName(patient.getLastName())
                 .pesel(patient.getPesel())
+                .street(patient.getAddress().getStreet())
+                .number(patient.getAddress().getNumber())
+                .city(patient.getAddress().getCity())
+                .zipCode(patient.getAddress().getZipCode())
                 .build();
     }
 }
