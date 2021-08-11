@@ -1,6 +1,5 @@
 package pl.sdaproject.medicalarchivemanagementsystem.dto;
 
-
 import lombok.Builder;
 import lombok.Getter;
 
