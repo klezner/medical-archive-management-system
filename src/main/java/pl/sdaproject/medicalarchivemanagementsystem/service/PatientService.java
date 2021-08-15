@@ -6,6 +6,7 @@ import pl.sdaproject.medicalarchivemanagementsystem.model.Address;
 import pl.sdaproject.medicalarchivemanagementsystem.model.Patient;
 import pl.sdaproject.medicalarchivemanagementsystem.repository.PatientRepository;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -28,5 +29,10 @@ public class PatientService {
     public Patient fetchPatient(Long id) {
 
         return patientRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Patient with id: " + id + " not found"));
+    }
+
+    public List<Patient> fetchAllPatients() {
+
+        return patientRepository.findAll();
     }
 }

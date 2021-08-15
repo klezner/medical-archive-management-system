@@ -13,6 +13,9 @@ import pl.sdaproject.medicalarchivemanagementsystem.service.AddressService;
 import pl.sdaproject.medicalarchivemanagementsystem.service.PatientService;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -51,5 +54,22 @@ public class PatientController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(patientMapper.mapPatientToPatientResponse(patient));
+    }
+
+    @GetMapping()
+    public ResponseEntity<List<PatientResponse>> getAllPatients() {
+        final List<Patient> patients = patientService.fetchAllPatients();
+
+        if (patients.size() == 0) {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(new ArrayList<>());
+        } else {
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(patients.stream()
+                            .map(patientMapper::mapPatientToPatientResponse)
+                            .collect(Collectors.toList()));
+        }
     }
 }
