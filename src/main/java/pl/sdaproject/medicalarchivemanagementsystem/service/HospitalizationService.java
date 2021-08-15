@@ -2,7 +2,7 @@ package pl.sdaproject.medicalarchivemanagementsystem.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.sdaproject.medicalarchivemanagementsystem.dao.HospitalizationRepository;
+import pl.sdaproject.medicalarchivemanagementsystem.repository.HospitalizationRepository;
 import pl.sdaproject.medicalarchivemanagementsystem.model.Hospitalization;
 
 import java.time.LocalDate;
