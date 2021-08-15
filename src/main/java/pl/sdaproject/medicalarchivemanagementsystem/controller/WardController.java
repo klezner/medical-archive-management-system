@@ -42,7 +42,7 @@ public class WardController {
         WardResponse responseBody = wardMapper.mapWardToWardResponse(ward);
 
         return ResponseEntity
-                .status(HttpStatus.OK)
+                .status(HttpStatus.CREATED)
                 .body(responseBody);
     }
 }
