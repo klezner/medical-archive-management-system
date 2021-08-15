@@ -16,5 +16,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class WardResponse {
 
-    private String wardResponseName;
+    private Long id;
+    private String wardName;
 }

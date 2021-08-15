@@ -18,18 +18,7 @@ public class WardService {
 
     public Ward createWard(String wardName) {
 
-        Ward ward = new Ward();
-
-        if (wardRepository.findByWardName(wardName).isPresent()) {
-            ward = wardRepository.findByWardName(wardName).get();
-        } else {
-            ward.setWardName(wardName);
-            wardRepository.save(ward);
-        }
-
-        Long id = ward.getId();
-
-        return fetchWard(id);
+        return wardRepository.findByWardName(wardName).orElseGet(() -> wardRepository.save(Ward.builder().wardName(wardName).build()));
     }
 
     public Ward fetchWard(Long id) {

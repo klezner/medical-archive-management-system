@@ -14,7 +14,8 @@ public class WardMapper {
     public WardResponse mapWardToWardResponse(Ward ward) {
 
         return WardResponse.builder()
-                .wardResponseName(ward.getWardName())
+                .id(ward.getId())
+                .wardName(ward.getWardName())
                 .build();
     }
 }
