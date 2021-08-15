@@ -13,6 +13,12 @@ import java.util.NoSuchElementException;
 @Slf4j
 public class ExceptionHandlerController {
 
+    @ExceptionHandler(HospitalizationDateException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public void handleHospitalizationDateException(HospitalizationDateException e) {
+        log.warn(e.getMessage());
+    }
+        
     @ExceptionHandler(ConstraintViolationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public void handleConstraintViolationException(ConstraintViolationException e) {
