@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.sdaproject.medicalarchivemanagementsystem.dto.CreateHospitalizationRequest;
+import pl.sdaproject.medicalarchivemanagementsystem.dto.HospitalizationRequest;
 import pl.sdaproject.medicalarchivemanagementsystem.dto.HospitalizationResponse;
 import pl.sdaproject.medicalarchivemanagementsystem.mapper.HospitalizationMapper;
 import pl.sdaproject.medicalarchivemanagementsystem.model.Hospitalization;
@@ -35,7 +35,7 @@ public class HospitalizationController {
     }
 
     @PostMapping("/hospitalization")
-    ResponseEntity<HospitalizationResponse> postHospitalization(@RequestBody @Valid CreateHospitalizationRequest request) {
+    ResponseEntity<HospitalizationResponse> postHospitalization(@RequestBody @Valid HospitalizationRequest request) {
         LocalDate hospitalizedFrom = request.getHospitalizationDateFrom();
         LocalDate hospitalizedTo = request.getHospitalizationDateTo();
 

@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Getter
-public class CreateHospitalizationRequest {
+public class HospitalizationRequest {
 
     @NotNull(message = "Date can't be null")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
