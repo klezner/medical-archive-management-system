@@ -13,5 +13,7 @@ import javax.validation.constraints.NotBlank;
 public class WardRequest {
 
     @NotBlank(message = "Ward name can't be null.")
-    private String wardName;
+    private String name;
+    @NotBlank(message = "Ward abbreviation can't be null.")
+    private String abbreviation;
 }

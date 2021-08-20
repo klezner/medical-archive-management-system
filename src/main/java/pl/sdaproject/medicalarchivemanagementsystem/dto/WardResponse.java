@@ -17,5 +17,6 @@ import lombok.NoArgsConstructor;
 public class WardResponse {
 
     private Long id;
-    private String wardName;
+    private String name;
+    private String abbreviation;
 }

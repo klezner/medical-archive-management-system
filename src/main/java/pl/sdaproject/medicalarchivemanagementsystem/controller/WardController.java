@@ -21,10 +21,10 @@ import javax.validation.Valid;
 public class WardController {
 
     @Autowired
-    private WardService wardService;
+    WardService wardService;
 
     @Autowired
-    private WardMapper wardMapper;
+    WardMapper wardMapper;
 
     @GetMapping(path = "/ward/{id}")
     public ResponseEntity<WardResponse> getWard(@PathVariable Long id) {
@@ -38,7 +38,7 @@ public class WardController {
     @PostMapping("/ward")
     ResponseEntity<WardResponse> postWard(@RequestBody @Valid WardRequest request) {
 
-        Ward ward = wardService.createWard(request.getWardName());
+        Ward ward = wardService.createWard(request.getName(), request.getAbbreviation());
         WardResponse responseBody = wardMapper.mapWardToWardResponse(ward);
 
         return ResponseEntity

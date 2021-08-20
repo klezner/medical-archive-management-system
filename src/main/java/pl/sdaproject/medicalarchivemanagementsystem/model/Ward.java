@@ -19,5 +19,6 @@ public class Ward {
     @Id
     @GeneratedValue
     private Long id;
-    private String wardName;
+    private String name;
+    private String abbreviation;
 }

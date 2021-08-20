@@ -16,12 +16,17 @@ public class WardService {
     @Autowired
     WardRepository wardRepository;
 
-    public Ward createWard(String wardName) {
+    public Ward createWard(String name, String abbreviation) {
 
-        return wardRepository.findByWardName(wardName).orElseGet(() -> wardRepository.save(Ward.builder().wardName(wardName).build()));
+        return wardRepository.findByName(name)
+                .orElseGet(() -> wardRepository.save(
+                        Ward.builder().name(name).abbreviation(abbreviation).build())
+                );
     }
 
     public Ward fetchWard(Long id) {
-        return wardRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Ward with id: " + id + "not found"));
+
+        return wardRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Ward with id: " + id + "not found"));
     }
 }
