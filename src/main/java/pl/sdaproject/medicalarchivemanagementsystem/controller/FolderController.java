@@ -29,7 +29,8 @@ public class FolderController {
                 request.getTypeLabel().toUpperCase(),
                 request.getStatusLabel().toUpperCase(),
                 request.getArchiveCategoryId(),
-                request.getLocationId()
+                request.getLocationId(),
+                request.getHospitalizationId()
         );
 
         return ResponseEntity

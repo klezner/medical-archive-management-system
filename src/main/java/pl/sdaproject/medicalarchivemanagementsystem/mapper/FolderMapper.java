@@ -20,6 +20,8 @@ public class FolderMapper {
                 .storagePeriodYears(folder.getArchiveCategory().getStoragePeriodYears())
                 .roomNumber(folder.getLocation().getRoomNumber())
                 .floor(folder.getLocation().getFloor())
+                .hospitalizationFrom(folder.getHospitalization().getHospitalizationFrom())
+                .hospitalizationTo(folder.getHospitalization().getHospitalizationTo())
                 .build();
     }
 }

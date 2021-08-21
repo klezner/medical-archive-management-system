@@ -3,6 +3,8 @@ package pl.sdaproject.medicalarchivemanagementsystem.dto;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.time.LocalDate;
+
 @Getter
 @Builder
 public class FolderResponse {
@@ -17,4 +19,6 @@ public class FolderResponse {
     private Integer storagePeriodYears;
     private String roomNumber;
     private Integer floor;
+    private LocalDate hospitalizationFrom;
+    private LocalDate hospitalizationTo;
 }
