@@ -18,7 +18,7 @@ public class ExceptionHandlerController {
     public void handleHospitalizationDateException(HospitalizationDateException e) {
         log.warn(e.getMessage());
     }
-        
+
     @ExceptionHandler(ConstraintViolationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public void handleConstraintViolationException(ConstraintViolationException e) {
