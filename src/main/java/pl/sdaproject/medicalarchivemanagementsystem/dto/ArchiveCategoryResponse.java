@@ -6,6 +6,7 @@ import lombok.Getter;
 @Getter
 @Builder
 public class ArchiveCategoryResponse {
+
     private Long id;
     private String categoryName;
     private Integer storagePeriodYears;
