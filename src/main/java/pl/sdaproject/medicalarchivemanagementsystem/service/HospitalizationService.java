@@ -12,13 +12,16 @@ import java.util.NoSuchElementException;
 public class HospitalizationService {
 
     @Autowired
+    private WardService wardService;
+    @Autowired
     private HospitalizationRepository hospitalizationRepository;
 
-    public Hospitalization createHospitalization(LocalDate hospitalizationFrom, LocalDate hospitalizationTo) {
+    public Hospitalization createHospitalization(LocalDate hospitalizationFrom, LocalDate hospitalizationTo, Long wardId) {
 
         Hospitalization hospitalization = new Hospitalization();
         hospitalization.setHospitalizationFrom(hospitalizationFrom);
         hospitalization.setHospitalizationTo(hospitalizationTo);
+        hospitalization.setWard(wardService.fetchWard(wardId));
 
         return hospitalizationRepository.save(hospitalization);
     }

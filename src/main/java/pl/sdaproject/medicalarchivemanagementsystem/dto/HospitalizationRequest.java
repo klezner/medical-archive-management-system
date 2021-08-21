@@ -15,4 +15,6 @@ public class HospitalizationRequest {
     @NotNull(message = "Date can't be null")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate hospitalizationDateTo;
+    @NotNull
+    private Long wardId;
 }

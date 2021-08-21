@@ -15,4 +15,5 @@ public class HospitalizationResponse {
 
     private LocalDate dateFrom;
     private LocalDate dateTo;
+    private String wardAbbreviation;
 }
