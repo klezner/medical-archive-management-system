@@ -11,6 +11,7 @@ public class HospitalizationMapper {
         return HospitalizationResponse.builder()
                 .dateFrom(hospitalization.getHospitalizationFrom())
                 .dateTo(hospitalization.getHospitalizationTo())
+                .wardAbbreviation(hospitalization.getWard().getAbbreviation())
                 .build();
     }
 }
