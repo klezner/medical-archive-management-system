@@ -7,14 +7,17 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.util.Set;
+import javax.validation.constraints.NotNull;
 
+/**
+ * @author MKgn
+ */
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Ward {
+public class Staff {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,9 +25,10 @@ public class Ward {
     @NotBlank
     private String name;
     @NotBlank
-    private String abbreviation;
-    @OneToMany(mappedBy = "ward")
-    private Set<Hospitalization> hospitalizations;
-    @OneToMany(mappedBy = "ward")
-    private Set<Staff> staff;
+    private String surname;
+    @NotNull
+    private Role role;
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Ward ward;
 }
