@@ -5,15 +5,18 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-
+/**
+ * WardResponse
+ *
+ * @author MKgn
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class HospitalizationResponse {
+public class WardResponse {
 
-    private LocalDate dateFrom;
-    private LocalDate dateTo;
-    private String wardAbbreviation;
+    private Long id;
+    private String name;
+    private String abbreviation;
 }
