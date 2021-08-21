@@ -22,6 +22,7 @@ public class FolderMapper {
                 .floor(folder.getLocation().getFloor())
                 .hospitalizationFrom(folder.getHospitalization().getHospitalizationFrom())
                 .hospitalizationTo(folder.getHospitalization().getHospitalizationTo())
+                .wardAbbreviation(folder.getHospitalization().getWard().getAbbreviation())
                 .build();
     }
 }

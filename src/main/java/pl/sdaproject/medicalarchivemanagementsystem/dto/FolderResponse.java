@@ -21,4 +21,5 @@ public class FolderResponse {
     private Integer floor;
     private LocalDate hospitalizationFrom;
     private LocalDate hospitalizationTo;
+    private String wardAbbreviation;
 }
