@@ -17,6 +17,7 @@ import java.util.Set;
 @Builder
 @Getter
 public class Location {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

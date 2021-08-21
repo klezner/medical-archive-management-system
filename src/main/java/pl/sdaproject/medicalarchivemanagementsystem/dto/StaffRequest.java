@@ -2,18 +2,24 @@ package pl.sdaproject.medicalarchivemanagementsystem.dto;
 
 import lombok.Builder;
 import lombok.Getter;
+import pl.sdaproject.medicalarchivemanagementsystem.model.Role;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
+/**
+ * @author MKgn
+ */
 @Getter
 @Builder
-public class LocationRequest {
+public class StaffRequest {
 
     @NotBlank
-    @Pattern(regexp = "[0-9]{1,3}")
-    private String roomNumber;
+    private String name;
+    @NotBlank
+    private String surname;
     @NotNull
-    private Integer floor;
+    private Role role;
+    @NotNull
+    private Long wardId;
 }

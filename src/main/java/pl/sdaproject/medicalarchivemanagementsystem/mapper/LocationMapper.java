@@ -9,6 +9,7 @@ public class LocationMapper {
     public LocationResponse mapLocationToLocationResponse(Location location) {
 
         return LocationResponse.builder()
+                .id(location.getId())
                 .roomNumber(location.getRoomNumber())
                 .floor(location.getFloor())
                 .build();

@@ -11,6 +11,9 @@ import pl.sdaproject.medicalarchivemanagementsystem.model.Location;
 import pl.sdaproject.medicalarchivemanagementsystem.service.LocationService;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -36,5 +39,22 @@ public class LocationController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(locationMapper.mapLocationToLocationResponse(location));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<LocationResponse>> getAllLocations() {
+        final List<Location> locations = locationService.fetchAllLocations();
+
+        if (locations.size() == 0) {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(new ArrayList<>());
+        } else {
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(locations.stream()
+                            .map(locationMapper::mapLocationToLocationResponse)
+                            .collect(Collectors.toList()));
+        }
     }
 }
