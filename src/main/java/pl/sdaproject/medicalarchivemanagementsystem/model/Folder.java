@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -28,10 +27,13 @@ public class Folder {
     @NotNull
     @Min(1)
     private Integer numberOfFolders;
-//    @NotBlank
+    @NotNull
     @Enumerated(EnumType.STRING)
     private FolderType type;
-//    @NotBlank
+    @NotNull
     @Enumerated(EnumType.STRING)
     private FolderStatus status;
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private ArchiveCategory archiveCategory;
 }

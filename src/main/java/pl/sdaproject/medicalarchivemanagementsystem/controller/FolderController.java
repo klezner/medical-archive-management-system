@@ -27,7 +27,8 @@ public class FolderController {
                 request.getLedgerId(),
                 request.getNumberOfFolders(),
                 request.getTypeLabel().toUpperCase(),
-                request.getStatusLabel().toUpperCase()
+                request.getStatusLabel().toUpperCase(),
+                request.getArchiveCategoryId()
         );
 
         return ResponseEntity

@@ -22,4 +22,6 @@ public class FolderRequest {
     private String typeLabel;
     @NotBlank
     private String statusLabel;
+    @NotNull
+    private Long archiveCategoryId;
 }

@@ -13,4 +13,6 @@ public class FolderResponse {
     private Integer numberOfFolders;
     private String typeLabel;
     private String statusLabel;
+    private String categoryName;
+    private Integer storagePeriodYears;
 }
