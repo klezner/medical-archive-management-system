@@ -20,4 +20,6 @@ public class StaffRequest {
     private String surname;
     @NotNull
     private Role role;
+    @NotNull
+    private Long wardId;
 }

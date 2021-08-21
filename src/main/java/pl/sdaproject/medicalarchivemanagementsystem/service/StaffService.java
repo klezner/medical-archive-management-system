@@ -20,11 +20,12 @@ public class StaffService {
     private final WardService wardService;
     private final StaffRepository staffRepository;
 
-    public Staff createStaff(String name, String surname, Role role) {
+    public Staff createStaff(String name, String surname, Role role, Long wardId) {
         final Staff staff = Staff.builder()
                 .name(name)
                 .surname(surname)
                 .role(role)
+                .ward(wardService.fetchWard(wardId))
                 .build();
 
         return staffRepository.save(staff);

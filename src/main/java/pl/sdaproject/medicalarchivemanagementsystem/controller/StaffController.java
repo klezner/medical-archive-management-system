@@ -27,7 +27,7 @@ public class StaffController {
 
     @PostMapping
     public ResponseEntity<StaffResponse> addStaff(@RequestBody @Valid StaffRequest staffRequest) {
-        final Staff staff = staffService.createStaff(staffRequest.getName(), staffRequest.getSurname(), staffRequest.getRole());
+        final Staff staff = staffService.createStaff(staffRequest.getName(), staffRequest.getSurname(), staffRequest.getRole(), staffRequest.getWardId());
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)

@@ -27,6 +27,7 @@ public class Staff {
     @NotBlank
     private String surname;
     @NotNull
+    @Enumerated(EnumType.STRING)
     private Role role;
     @ManyToOne
     @JoinColumn(nullable = false)
