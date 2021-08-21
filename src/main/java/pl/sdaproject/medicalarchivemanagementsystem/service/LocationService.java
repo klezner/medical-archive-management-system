@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import pl.sdaproject.medicalarchivemanagementsystem.model.Location;
 import pl.sdaproject.medicalarchivemanagementsystem.repository.LocationRepository;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -13,15 +14,21 @@ public class LocationService {
     private final LocationRepository locationRepository;
 
     public Location createLocation(String roomNumber, Integer floor) {
-        final Location location = Location.builder()
-                .roomNumber(roomNumber)
-                .floor(floor)
-                .build();
 
-        return locationRepository.save(location);
+        return locationRepository.findByRoomNumber(roomNumber)
+                .orElseGet(() -> locationRepository.save(
+                        Location.builder().roomNumber(roomNumber).floor(floor).build()
+                ));
     }
 
     public Location fetchLocation(Long id) {
-        return locationRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Location with id: " + id + " doesn't exist."));
+
+        return locationRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Location with id: " + id + " doesn't exist."));
+    }
+
+    public List<Location> fetchAllLocations() {
+
+        return locationRepository.findAll();
     }
 }
