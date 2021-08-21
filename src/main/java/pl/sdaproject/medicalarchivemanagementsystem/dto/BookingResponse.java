@@ -14,6 +14,5 @@ import java.time.LocalDate;
 public class BookingResponse {
 
     private LocalDate bookingDate;
-    private LocalDate loanDate;
     private LocalDate returnDate;
 }

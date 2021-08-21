@@ -8,16 +8,15 @@ import javax.persistence.Id;
 import java.time.LocalDate;
 
 @Entity
-@AllArgsConstructor
+@Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
-@Getter
 public class Booking {
 
     @Id
     @GeneratedValue
     private Long id;
     private LocalDate bookingDate;
-    private LocalDate loanDate;
     private LocalDate returnDate;
 }

@@ -9,7 +9,6 @@ public class BookingMapper {
     public BookingResponse mapBookingToBookingResponse(Booking booking) {
         return BookingResponse.builder()
                 .bookingDate(booking.getBookingDate())
-                .loanDate(booking.getLoanDate())
                 .returnDate(booking.getReturnDate())
                 .build();
     }

@@ -6,6 +6,7 @@ import pl.sdaproject.medicalarchivemanagementsystem.model.Booking;
 import pl.sdaproject.medicalarchivemanagementsystem.repository.BookingRepository;
 
 import java.time.LocalDate;
+import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor
@@ -20,16 +21,13 @@ public class BookingService {
         return bookingRepository.save(booking);
     }
 
-    public Booking createLoan(LocalDate loanDate) {
-        final Booking booking = Booking.builder()
-                .loanDate(loanDate)
-                .build();
-        return bookingRepository.save(booking);
-    }
-    public Booking createReturn(LocalDate returnDate) {
-        final Booking booking = Booking.builder()
-                .returnDate(returnDate)
-                .build();
+    public Booking createReturn(LocalDate returnDate, Long id) {
+
+        final Booking booking = bookingRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Booking with id: " + id + "not found"));
+
+        booking.setReturnDate(returnDate);
+
         return bookingRepository.save(booking);
     }
 }
