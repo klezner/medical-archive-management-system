@@ -13,6 +13,8 @@ import java.time.LocalDate;
 @Builder
 public class BookingResponse {
 
+    private Long folderId;
+    private Long staffId;
     private LocalDate bookingDate;
     private LocalDate returnDate;
 }

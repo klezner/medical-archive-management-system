@@ -30,7 +30,7 @@ public class BookingController {
                 .body(bookingMapper.mapBookingToBookingResponse(booking));
     }
 
-    @PatchMapping(path = "/{id}")
+    @PatchMapping
     public ResponseEntity<BookingResponse> addReturnDateToBooking(@RequestBody @Valid BookingRequest request) {
         final Booking booking = bookingService.createReturn(
                 request.getReturnDate(),

@@ -14,10 +14,10 @@ public class BookingRequest {
     @Id
     @GeneratedValue
     private Long id;
-//    @NotNull
-//    private Long folderId;
-//    @NotNull
-//    private Long staffId;
+    @NotNull
+    private Long folderId;
+    @NotNull
+    private Long staffId;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate bookingDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")

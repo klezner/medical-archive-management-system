@@ -17,6 +17,8 @@ public class Booking {
     @Id
     @GeneratedValue
     private Long id;
+    private Long folderId;
+    private Long staffId;
     private LocalDate bookingDate;
     private LocalDate returnDate;
 }
