@@ -13,10 +13,11 @@ import java.util.NoSuchElementException;
 @RequiredArgsConstructor
 public class FolderService {
 
+    private final LocationService locationService;
     private final ArchiveCategoryService archiveCategoryService;
     private final FolderRepository folderRepository;
 
-    public Folder createFolder(Integer year, Integer ledgerId, Integer numberOfFolders, String typeLabel, String statusLabel, Long archiveCategoryId) {
+    public Folder createFolder(Integer year, Integer ledgerId, Integer numberOfFolders, String typeLabel, String statusLabel, Long archiveCategoryId, Long locationId) {
         final Folder folder = Folder.builder()
                 .year(year)
                 .ledgerId(ledgerId)
@@ -24,6 +25,7 @@ public class FolderService {
                 .type(FolderType.valueOf(typeLabel))
                 .status(FolderStatus.valueOf(statusLabel))
                 .archiveCategory(archiveCategoryService.fetchArchiveCategory(archiveCategoryId))
+                .location(locationService.fetchLocation(locationId))
                 .build();
 
         return folderRepository.save(folder);

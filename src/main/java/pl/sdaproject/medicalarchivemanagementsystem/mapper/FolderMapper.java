@@ -18,6 +18,8 @@ public class FolderMapper {
                 .statusLabel(folder.getStatus().getLabel())
                 .categoryName(folder.getArchiveCategory().getCategoryName())
                 .storagePeriodYears(folder.getArchiveCategory().getStoragePeriodYears())
+                .roomNumber(folder.getLocation().getRoomNumber())
+                .floor(folder.getLocation().getFloor())
                 .build();
     }
 }

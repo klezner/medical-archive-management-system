@@ -26,5 +26,5 @@ public class ArchiveCategory {
     @Min(1)
     private Integer storagePeriodYears;
     @OneToMany(mappedBy = "archiveCategory")
-    private Set<Folder> folder;
+    private Set<Folder> folders;
 }

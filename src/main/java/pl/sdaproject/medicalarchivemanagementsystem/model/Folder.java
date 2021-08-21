@@ -36,4 +36,7 @@ public class Folder {
     @ManyToOne
     @JoinColumn(nullable = false)
     private ArchiveCategory archiveCategory;
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Location location;
 }

@@ -15,4 +15,6 @@ public class FolderResponse {
     private String statusLabel;
     private String categoryName;
     private Integer storagePeriodYears;
+    private String roomNumber;
+    private Integer floor;
 }
