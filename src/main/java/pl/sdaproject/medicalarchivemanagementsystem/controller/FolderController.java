@@ -3,10 +3,7 @@ package pl.sdaproject.medicalarchivemanagementsystem.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.sdaproject.medicalarchivemanagementsystem.dto.FolderRequest;
 import pl.sdaproject.medicalarchivemanagementsystem.dto.FolderResponse;
 import pl.sdaproject.medicalarchivemanagementsystem.mapper.FolderMapper;
@@ -35,6 +32,15 @@ public class FolderController {
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
+                .body(folderMapper.mapFolderToFolderResponse(folder));
+    }
+
+    @GetMapping(path = "/{id}")
+    public ResponseEntity<FolderResponse> getFolder(@PathVariable Long id) {
+        final Folder folder = folderService.fetchFolder(id);
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
                 .body(folderMapper.mapFolderToFolderResponse(folder));
     }
 }
