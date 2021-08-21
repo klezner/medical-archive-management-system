@@ -4,9 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -20,4 +18,7 @@ public class Hospitalization {
     private Long id;
     private LocalDate hospitalizationFrom;
     private LocalDate hospitalizationTo;
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Ward ward;
 }

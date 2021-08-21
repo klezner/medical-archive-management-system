@@ -38,10 +38,11 @@ public class HospitalizationController {
     ResponseEntity<HospitalizationResponse> postHospitalization(@RequestBody @Valid HospitalizationRequest request) {
         LocalDate hospitalizedFrom = request.getHospitalizationDateFrom();
         LocalDate hospitalizedTo = request.getHospitalizationDateTo();
+        Long wardId = request.getWardId();
 
         validateHospitalizationDate(hospitalizedFrom, hospitalizedTo);
 
-        Hospitalization hospitalization = hospitalizationService.createHospitalization(hospitalizedFrom, hospitalizedTo);
+        Hospitalization hospitalization = hospitalizationService.createHospitalization(hospitalizedFrom, hospitalizedTo, wardId);
         HospitalizationResponse responseBody = hospitalizationMapper.mapHospitalizationToHospitalizationResponse(hospitalization);
 
         return ResponseEntity
