@@ -20,7 +20,6 @@ import java.util.stream.Collectors;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(path = "/patient")
-@CrossOrigin(origins = "http://localhost:4200")
 public class PatientController {
 
     private final AddressService addressService;
