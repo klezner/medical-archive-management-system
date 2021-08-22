@@ -11,8 +11,6 @@ import java.time.LocalDate;
 @Getter
 public class BookingRequest {
 
-    @Id
-    @GeneratedValue
     private Long id;
     @NotNull
     private Long folderId;
