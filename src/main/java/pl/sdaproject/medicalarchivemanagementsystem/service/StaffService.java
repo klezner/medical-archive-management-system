@@ -6,6 +6,7 @@ import pl.sdaproject.medicalarchivemanagementsystem.model.Role;
 import pl.sdaproject.medicalarchivemanagementsystem.model.Staff;
 import pl.sdaproject.medicalarchivemanagementsystem.repository.StaffRepository;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 /**
@@ -33,6 +34,12 @@ public class StaffService {
 
     public Staff fetchStaff(Long id) {
 
-        return staffRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Staff with id: " + id + " not found"));
+        return staffRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Staff with id: " + id + " not found"));
+    }
+
+    public List<Staff> fetchAllLocations() {
+
+        return staffRepository.findAll();
     }
 }
