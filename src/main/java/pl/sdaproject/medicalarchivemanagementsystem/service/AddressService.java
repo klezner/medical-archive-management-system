@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import pl.sdaproject.medicalarchivemanagementsystem.model.Address;
 import pl.sdaproject.medicalarchivemanagementsystem.repository.AddressRepository;
 
+import javax.transaction.Transactional;
 import java.util.NoSuchElementException;
 
 @Service
@@ -26,6 +27,20 @@ public class AddressService {
 
     public Address fetchAddress(Long id) {
 
-        return addressRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Address with id: " + id + " not found"));
+        return addressRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Address with id: " + id + " not found"));
+    }
+
+    @Transactional
+    public Address updateAddress(Long id, String street, String number, String city, String zipCode) {
+        final Address address = addressRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Address with id: " + id + " not found"));
+
+        address.setStreet(street);
+        address.setNumber(number);
+        address.setCity(city);
+        address.setZipCode(zipCode);
+
+        return address;
     }
 }
