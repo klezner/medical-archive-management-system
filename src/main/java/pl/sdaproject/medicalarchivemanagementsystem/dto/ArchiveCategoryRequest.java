@@ -11,6 +11,7 @@ import javax.validation.constraints.Pattern;
 @Getter
 @Builder
 public class ArchiveCategoryRequest {
+
     @NotBlank
     @Pattern(regexp = "[A-Z]+")
     private String categoryName;

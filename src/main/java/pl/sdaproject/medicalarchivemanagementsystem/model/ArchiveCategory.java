@@ -16,6 +16,7 @@ import java.util.Set;
 @Builder
 @Getter
 public class ArchiveCategory {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
