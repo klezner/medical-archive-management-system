@@ -22,4 +22,7 @@ public class FolderResponse {
     private LocalDate hospitalizationFrom;
     private LocalDate hospitalizationTo;
     private String wardAbbreviation;
+    private String firstName;
+    private String lastName;
+    private String pesel;
 }

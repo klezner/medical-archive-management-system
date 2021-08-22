@@ -28,4 +28,6 @@ public class FolderRequest {
     private Long locationId;
     @NotNull
     private Long hospitalizationId;
+    @NotNull
+    private Long patientId;
 }

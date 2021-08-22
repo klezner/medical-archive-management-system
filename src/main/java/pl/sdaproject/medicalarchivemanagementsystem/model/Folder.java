@@ -42,4 +42,7 @@ public class Folder {
     @ManyToOne
     @JoinColumn(nullable = false)
     private Hospitalization hospitalization;
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Patient patient;
 }

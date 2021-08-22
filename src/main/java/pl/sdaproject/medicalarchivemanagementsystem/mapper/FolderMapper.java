@@ -23,6 +23,9 @@ public class FolderMapper {
                 .hospitalizationFrom(folder.getHospitalization().getHospitalizationFrom())
                 .hospitalizationTo(folder.getHospitalization().getHospitalizationTo())
                 .wardAbbreviation(folder.getHospitalization().getWard().getAbbreviation())
+                .firstName(folder.getPatient().getFirstName())
+                .lastName(folder.getPatient().getLastName())
+                .pesel(folder.getPatient().getPesel())
                 .build();
     }
 }
