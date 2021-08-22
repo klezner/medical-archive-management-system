@@ -30,7 +30,8 @@ public class FolderController {
                 request.getStatusLabel().toUpperCase(),
                 request.getArchiveCategoryId(),
                 request.getLocationId(),
-                request.getHospitalizationId()
+                request.getHospitalizationId(),
+                request.getPatientId()
         );
 
         return ResponseEntity

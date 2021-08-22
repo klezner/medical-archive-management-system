@@ -8,6 +8,7 @@ import org.hibernate.validator.constraints.pl.PESEL;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.Set;
 
 @Entity
 @AllArgsConstructor
@@ -28,4 +29,6 @@ public class Patient {
     private String pesel;
     @OneToOne
     private Address address;
+    @OneToMany(mappedBy = "patient")
+    private Set<Folder> folders;
 }
