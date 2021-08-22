@@ -23,6 +23,8 @@ public class BookingController {
     @PostMapping
     public ResponseEntity<BookingResponse> addBooking(@RequestBody @Valid BookingRequest request) {
         final Booking booking = bookingService.createBooking(
+                request.getFolderId(),
+                request.getStaffId(),
                 request.getBookingDate());
 
         return ResponseEntity

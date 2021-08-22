@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pl.sdaproject.medicalarchivemanagementsystem.model.Folder;
+import pl.sdaproject.medicalarchivemanagementsystem.model.Staff;
 
 import java.time.LocalDate;
 
@@ -13,8 +15,11 @@ import java.time.LocalDate;
 @Builder
 public class BookingResponse {
 
-    private Long folderId;
-    private Long staffId;
+    private Integer year;
+    private Integer ledgerId;
+    private String folderStatus;
+    private String staffName;
+    private String staffSurname;
     private LocalDate bookingDate;
     private LocalDate returnDate;
 }

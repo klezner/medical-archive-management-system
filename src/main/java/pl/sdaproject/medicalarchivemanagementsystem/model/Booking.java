@@ -2,9 +2,7 @@ package pl.sdaproject.medicalarchivemanagementsystem.model;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -17,8 +15,12 @@ public class Booking {
     @Id
     @GeneratedValue
     private Long id;
-    private Long folderId;
-    private Long staffId;
+    @OneToOne
+    @JoinColumn(nullable = false)
+    private Folder folder;
+    @OneToOne
+    @JoinColumn(nullable = false)
+    private Staff staff;
     private LocalDate bookingDate;
     private LocalDate returnDate;
 }

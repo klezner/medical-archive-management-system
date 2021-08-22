@@ -8,8 +8,11 @@ import pl.sdaproject.medicalarchivemanagementsystem.model.Booking;
 public class BookingMapper {
     public BookingResponse mapBookingToBookingResponse(Booking booking) {
         return BookingResponse.builder()
-                .folderId(booking.getFolderId())
-                .staffId(booking.getStaffId())
+                .year(booking.getFolder().getYear())
+                .ledgerId(booking.getFolder().getLedgerId())
+                .folderStatus(booking.getFolder().getStatus().getLabel())
+                .staffName(booking.getStaff().getName())
+                .staffSurname(booking.getStaff().getSurname())
                 .bookingDate(booking.getBookingDate())
                 .returnDate(booking.getReturnDate())
                 .build();
