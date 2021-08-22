@@ -1,7 +1,6 @@
 package pl.sdaproject.medicalarchivemanagementsystem.model;
 
 import lombok.*;
-import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
