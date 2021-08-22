@@ -12,7 +12,7 @@ public class ArchiveCategoryMapper {
         return ArchiveCategoryResponse.builder()
                 .id(archiveCategory.getId())
                 .categoryName(archiveCategory.getCategoryName())
-                .storagePeriodYears(archiveCategory.getStoragePeriodYears())
+                .storageYears(archiveCategory.getStorageYears())
                 .build();
     }
 }
