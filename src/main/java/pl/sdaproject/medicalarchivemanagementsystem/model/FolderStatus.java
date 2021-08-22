@@ -2,7 +2,6 @@ package pl.sdaproject.medicalarchivemanagementsystem.model;
 
 public enum FolderStatus {
     IN_ARCHIVE("In archive"),
-    RESERVED("Reserved"),
     BORROWED("Borrowed");
 
     private final String label;

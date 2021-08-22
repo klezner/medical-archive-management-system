@@ -5,9 +5,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.sdaproject.medicalarchivemanagementsystem.model.Booking;
 import pl.sdaproject.medicalarchivemanagementsystem.model.FolderStatus;
+import pl.sdaproject.medicalarchivemanagementsystem.model.Patient;
 import pl.sdaproject.medicalarchivemanagementsystem.repository.BookingRepository;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -44,5 +46,16 @@ public class BookingService {
         booking.getFolder().setStatus(FolderStatus.IN_ARCHIVE);
 
         return bookingRepository.save(booking);
+    }
+
+    public Booking fetchBooking(Long id) {
+
+        return bookingRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Booking with id: " + id + " not found"));
+    }
+
+    public List<Booking> fetchAllBookings() {
+
+        return bookingRepository.findAll();
     }
 }
