@@ -41,4 +41,18 @@ public class AddressController {
                 .status(HttpStatus.OK)
                 .body(addressMapper.mapAddressToAddressResponse(address));
     }
+
+    @PutMapping
+    public ResponseEntity<AddressResponse> editAddress(@RequestBody @Valid AddressRequest request) {
+        final Address address = addressService.updateAddress(
+                request.getId(),
+                request.getStreet(),
+                request.getNumber(),
+                request.getCity(),
+                request.getZipCode());
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(addressMapper.mapAddressToAddressResponse(address));
+    }
 }
