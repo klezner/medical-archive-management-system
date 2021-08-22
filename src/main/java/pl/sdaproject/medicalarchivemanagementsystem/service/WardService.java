@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import pl.sdaproject.medicalarchivemanagementsystem.model.Ward;
 import pl.sdaproject.medicalarchivemanagementsystem.repository.WardRepository;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 /**
@@ -28,5 +29,10 @@ public class WardService {
 
         return wardRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Ward with id: " + id + "not found"));
+    }
+
+    public List<Ward> fetchAllLocations() {
+
+        return wardRepository.findAll();
     }
 }
