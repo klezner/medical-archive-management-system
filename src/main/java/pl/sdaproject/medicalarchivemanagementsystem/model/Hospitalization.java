@@ -14,7 +14,7 @@ import java.time.LocalDate;
 public class Hospitalization {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDate hospitalizationFrom;
     private LocalDate hospitalizationTo;
