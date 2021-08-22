@@ -7,6 +7,7 @@ import pl.sdaproject.medicalarchivemanagementsystem.model.FolderStatus;
 import pl.sdaproject.medicalarchivemanagementsystem.model.FolderType;
 import pl.sdaproject.medicalarchivemanagementsystem.repository.FolderRepository;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -38,5 +39,10 @@ public class FolderService {
     public Folder fetchFolder(Long id) {
 
         return folderRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Folder with id: " + id + " not found"));
+    }
+
+    public List<Folder> fetchAllFolders() {
+
+        return folderRepository.findAll();
     }
 }
