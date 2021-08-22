@@ -11,6 +11,9 @@ import pl.sdaproject.medicalarchivemanagementsystem.model.Ward;
 import pl.sdaproject.medicalarchivemanagementsystem.service.WardService;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * WardController
@@ -44,5 +47,22 @@ public class WardController {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(responseBody);
+    }
+
+    @GetMapping(path = "ward")
+    ResponseEntity<List<WardResponse>> getAllWards() {
+        final List<Ward> wards = wardService.fetchAllLocations();
+
+        if (wards.size() == 0) {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(new ArrayList<>());
+        } else {
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(wards.stream()
+                            .map(wardMapper::mapWardToWardResponse)
+                            .collect(Collectors.toList()));
+        }
     }
 }
