@@ -11,6 +11,9 @@ import pl.sdaproject.medicalarchivemanagementsystem.model.Staff;
 import pl.sdaproject.medicalarchivemanagementsystem.service.StaffService;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * StaffController
@@ -34,12 +37,29 @@ public class StaffController {
                 .body(staffMapper.mapStaffToStaffResponse(staff));
     }
 
-    @GetMapping(path = "staff/{id}")
+    @GetMapping(path = "/{id}")
     public ResponseEntity<StaffResponse> getStaff(@PathVariable Long id) {
         final Staff staff = staffService.fetchStaff(id);
 
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(staffMapper.mapStaffToStaffResponse(staff));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<StaffResponse>> getAllLocations() {
+        final List<Staff> staff = staffService.fetchAllLocations();
+
+        if (staff.size() == 0) {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(new ArrayList<>());
+        } else {
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(staff.stream()
+                            .map(staffMapper::mapStaffToStaffResponse)
+                            .collect(Collectors.toList()));
+        }
     }
 }
