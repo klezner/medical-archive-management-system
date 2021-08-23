@@ -2,31 +2,25 @@ package pl.sdaproject.medicalarchivemanagementsystem.dto;
 
 import lombok.Builder;
 import lombok.Getter;
-import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.pl.PESEL;
+import pl.sdaproject.medicalarchivemanagementsystem.validator.ZipCodeConstraint;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
 
 @Getter
 @Builder
 public class PatientRequest {
 
-    @NotBlank
+    private Long id;
+    @NotBlank(message = "First name can't be null")
     private String firstName;
-    @NotBlank
+    @NotBlank(message = "Last name can't be null")
     private String lastName;
-    @NotBlank
-    @PESEL
+    @PESEL(message = "Incorrect pesel")
     private String pesel;
-    @NotBlank
     private String street;
-    @NotBlank
     private String number;
-    @NotBlank
     private String city;
-    @NotBlank
-    @Length(min = 6, max = 6, message = "Wrong zipCode length")
-    @Pattern(regexp = "[0-9]{2}-[0-9]{3}", message = "wrong zipCode format")
+    @ZipCodeConstraint(message = "Incorrect zip code")
     private String zipCode;
 }

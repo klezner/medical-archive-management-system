@@ -41,6 +41,6 @@ public class AddressService {
         address.setCity(city);
         address.setZipCode(zipCode);
 
-        return address;
+        return addressRepository.save(address);
     }
 }

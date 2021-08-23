@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(path = "/patient")
+@CrossOrigin(origins = "http://localhost:4200")
 public class PatientController {
 
     private final AddressService addressService;
@@ -71,5 +72,23 @@ public class PatientController {
                             .map(patientMapper::mapPatientToPatientResponse)
                             .collect(Collectors.toList()));
         }
+    }
+
+    @PutMapping
+    public ResponseEntity<PatientResponse> editPatient(@RequestBody @Valid PatientRequest request) {
+        final Patient patient = patientService.updatePatient(
+                request.getId(),
+                request.getFirstName(),
+                request.getLastName(),
+                request.getPesel(),
+                request.getStreet(),
+                request.getNumber(),
+                request.getCity(),
+                request.getZipCode()
+        );
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(patientMapper.mapPatientToPatientResponse(patient));
     }
 }
