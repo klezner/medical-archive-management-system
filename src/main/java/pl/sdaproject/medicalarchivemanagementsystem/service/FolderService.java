@@ -2,6 +2,7 @@ package pl.sdaproject.medicalarchivemanagementsystem.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.sdaproject.medicalarchivemanagementsystem.model.Folder;
 import pl.sdaproject.medicalarchivemanagementsystem.model.FolderStatus;
 import pl.sdaproject.medicalarchivemanagementsystem.model.FolderType;
@@ -44,5 +45,23 @@ public class FolderService {
     public List<Folder> fetchAllFolders() {
 
         return folderRepository.findAll();
+    }
+
+    @Transactional
+    public Folder updateFolder(Long id, Integer year, Integer ledgerId, Integer numberOfFolders, String typeLabel, String statusLabel, Long archiveCategoryId, Long locationId, Long hospitalizationId, Long patientId) {
+        final Folder folder = folderRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Folder with id: " + id + " not found"));
+
+        folder.setYear(year);
+        folder.setLedgerId(ledgerId);
+        folder.setNumberOfFolders(numberOfFolders);
+        folder.setType(FolderType.valueOf(typeLabel));
+        folder.setStatus(FolderStatus.valueOf(statusLabel));
+        folder.setArchiveCategory(archiveCategoryService.fetchArchiveCategory(archiveCategoryId));
+        folder.setLocation(locationService.fetchLocation(locationId));
+        folder.setHospitalization(hospitalizationService.fetchHospitalization(hospitalizationId));
+        folder.setPatient(patientService.fetchPatient(patientId));
+
+        return folderRepository.save(folder);
     }
 }

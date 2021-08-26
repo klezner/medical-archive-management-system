@@ -67,4 +67,24 @@ public class FolderController {
                             .collect(Collectors.toList()));
         }
     }
+
+    @PutMapping
+    public ResponseEntity<FolderResponse> editFolder(@RequestBody @Valid FolderRequest request) {
+        final Folder folder = folderService.updateFolder(
+                request.getId(),
+                request.getYear(),
+                request.getLedgerId(),
+                request.getNumberOfFolders(),
+                request.getTypeLabel().toUpperCase(),
+                request.getStatusLabel().toUpperCase(),
+                request.getArchiveCategoryId(),
+                request.getLocationId(),
+                request.getHospitalizationId(),
+                request.getPatientId()
+        );
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(folderMapper.mapFolderToFolderResponse(folder));
+    }
 }
