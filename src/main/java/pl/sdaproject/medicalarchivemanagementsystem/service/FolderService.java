@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import pl.sdaproject.medicalarchivemanagementsystem.model.Folder;
 import pl.sdaproject.medicalarchivemanagementsystem.model.FolderStatus;
 import pl.sdaproject.medicalarchivemanagementsystem.model.FolderType;
+import pl.sdaproject.medicalarchivemanagementsystem.model.Hospitalization;
 import pl.sdaproject.medicalarchivemanagementsystem.repository.FolderRepository;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public class FolderService {
     private final ArchiveCategoryService archiveCategoryService;
     private final FolderRepository folderRepository;
 
-    public Folder createFolder(Integer year, Integer ledgerId, Integer numberOfFolders, String typeLabel, String statusLabel, Long archiveCategoryId, Long locationId, Long hospitalizationId, Long patientId) {
+    public Folder createFolder(Integer year, Integer ledgerId, Integer numberOfFolders, String typeLabel, String statusLabel, Long archiveCategoryId, Long locationId, Hospitalization hospitalization, Long patientId) {
         final Folder folder = Folder.builder()
                 .year(year)
                 .ledgerId(ledgerId)
@@ -29,7 +30,7 @@ public class FolderService {
                 .status(FolderStatus.valueOf(statusLabel))
                 .archiveCategory(archiveCategoryService.fetchArchiveCategory(archiveCategoryId))
                 .location(locationService.fetchLocation(locationId))
-                .hospitalization(hospitalizationService.fetchHospitalization(hospitalizationId))
+                .hospitalization(hospitalization)
                 .patient(patientService.fetchPatient(patientId))
                 .build();
 
