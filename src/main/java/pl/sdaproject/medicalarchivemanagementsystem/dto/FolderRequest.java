@@ -10,6 +10,8 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Builder
 public class FolderRequest {
+
+    private Long id;
     @NotNull
     private Integer year;
     @NotNull
