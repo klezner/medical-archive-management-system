@@ -41,7 +41,7 @@ public class ArchiveCategoryService {
 
         archiveCategory.setCategoryName(categoryName);
         archiveCategory.setStorageYears(storageYears);
-        
-        return archiveCategory;
+
+        return archiveCategoryRepository.save(archiveCategory);
     }
 }
