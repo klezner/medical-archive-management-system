@@ -12,10 +12,11 @@ import javax.validation.constraints.Pattern;
 @Builder
 public class ArchiveCategoryRequest {
 
-    @NotBlank
+    private Long id;
+    @NotBlank(message = "Category name can't be null")
     @Pattern(regexp = "[A-Z]+")
     private String categoryName;
-    @NotNull
+    @NotNull(message = "Storage years can't be null")
     @Min(1)
-    private Integer storagePeriodYears;
+    private Integer storageYears;
 }
