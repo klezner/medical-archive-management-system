@@ -29,8 +29,8 @@ public class StaffController {
     private final StaffService staffService;
 
     @PostMapping
-    public ResponseEntity<StaffResponse> addStaff(@RequestBody @Valid StaffRequest staffRequest) {
-        final Staff staff = staffService.createStaff(staffRequest.getName(), staffRequest.getSurname(), staffRequest.getRole(), staffRequest.getWardId());
+    public ResponseEntity<StaffResponse> addStaff(@RequestBody @Valid StaffRequest request) {
+        final Staff staff = staffService.createStaff(request.getName(), request.getSurname(), request.getRole(), request.getWardId());
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
@@ -61,5 +61,20 @@ public class StaffController {
                             .map(staffMapper::mapStaffToStaffResponse)
                             .collect(Collectors.toList()));
         }
+    }
+
+    @PutMapping
+    public ResponseEntity<StaffResponse> editStaff(@RequestBody @Valid StaffRequest request) {
+        final Staff staff = staffService.updateStaff(
+                request.getId(),
+                request.getName(),
+                request.getSurname(),
+                request.getRole(),
+                request.getWardId()
+        );
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(staffMapper.mapStaffToStaffResponse(staff));
     }
 }

@@ -6,9 +6,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.sdaproject.medicalarchivemanagementsystem.dto.FolderRequest;
 import pl.sdaproject.medicalarchivemanagementsystem.dto.FolderResponse;
+import pl.sdaproject.medicalarchivemanagementsystem.dto.FolderWithArchiveCategoryIdRequest;
 import pl.sdaproject.medicalarchivemanagementsystem.mapper.FolderMapper;
+import pl.sdaproject.medicalarchivemanagementsystem.model.ArchiveCategory;
 import pl.sdaproject.medicalarchivemanagementsystem.model.Folder;
 import pl.sdaproject.medicalarchivemanagementsystem.model.Hospitalization;
+import pl.sdaproject.medicalarchivemanagementsystem.service.ArchiveCategoryService;
 import pl.sdaproject.medicalarchivemanagementsystem.service.FolderService;
 import pl.sdaproject.medicalarchivemanagementsystem.service.HospitalizationService;
 
@@ -23,6 +26,7 @@ import java.util.stream.Collectors;
 public class FolderController {
 
     private final HospitalizationService hospitalizationService;
+    private final ArchiveCategoryService archiveCategoryService;
     private final FolderMapper folderMapper;
     private final FolderService folderService;
 
@@ -64,6 +68,25 @@ public class FolderController {
     @GetMapping
     public ResponseEntity<List<FolderResponse>> getAllFolders() {
         final List<Folder> folders = folderService.fetchAllFolders();
+
+        if (folders.size() == 0) {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(new ArrayList<>());
+        } else {
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(folders.stream()
+                            .map(folderMapper::mapFolderToFolderResponse)
+                            .collect(Collectors.toList()));
+        }
+    }
+
+    @PostMapping(path = "archiveCategory")
+    public ResponseEntity<List<FolderResponse>> getAllFoldersWithArchiveCategoryId(@RequestBody @Valid FolderWithArchiveCategoryIdRequest request) {
+        final ArchiveCategory archiveCategory = archiveCategoryService.fetchArchiveCategory(request.getArchiveCategoryId());
+
+        final List<Folder> folders = folderService.fetchAllFoldersWithArchiveCategoryId(archiveCategory);
 
         if (folders.size() == 0) {
             return ResponseEntity

@@ -14,6 +14,7 @@ import javax.validation.constraints.NotNull;
 @Builder
 public class StaffRequest {
 
+    private Long id;
     @NotBlank
     private String name;
     @NotBlank

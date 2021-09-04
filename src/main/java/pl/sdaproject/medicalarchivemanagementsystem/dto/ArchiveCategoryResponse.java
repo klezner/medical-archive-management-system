@@ -9,5 +9,5 @@ public class ArchiveCategoryResponse {
 
     private Long id;
     private String categoryName;
-    private Integer storagePeriodYears;
+    private Integer storageYears;
 }
