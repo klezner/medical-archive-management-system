@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.*;
 import pl.sdaproject.medicalarchivemanagementsystem.dto.FolderRequest;
 import pl.sdaproject.medicalarchivemanagementsystem.dto.FolderResponse;
 import pl.sdaproject.medicalarchivemanagementsystem.dto.FolderWithArchiveCategoryIdRequest;
+import pl.sdaproject.medicalarchivemanagementsystem.dto.FolderWithSelectedFolderStatusRequest;
 import pl.sdaproject.medicalarchivemanagementsystem.mapper.FolderMapper;
 import pl.sdaproject.medicalarchivemanagementsystem.model.ArchiveCategory;
 import pl.sdaproject.medicalarchivemanagementsystem.model.Folder;
+import pl.sdaproject.medicalarchivemanagementsystem.model.FolderStatus;
 import pl.sdaproject.medicalarchivemanagementsystem.model.Hospitalization;
 import pl.sdaproject.medicalarchivemanagementsystem.service.ArchiveCategoryService;
 import pl.sdaproject.medicalarchivemanagementsystem.service.FolderService;
@@ -108,6 +110,25 @@ public class FolderController {
         final ArchiveCategory archiveCategory = archiveCategoryService.fetchArchiveCategory(request.getArchiveCategoryId());
 
         final List<Folder> folders = folderService.fetchAllFoldersWithArchiveCategoryId(archiveCategory);
+
+        if (folders.size() == 0) {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(new ArrayList<>());
+        } else {
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(folders.stream()
+                            .map(folderMapper::mapFolderToFolderResponse)
+                            .collect(Collectors.toList()));
+        }
+    }
+
+    @PostMapping(path = "folderStatus")
+    public ResponseEntity<List<FolderResponse>> getAllFoldersWithSelectedFolderStatus(@RequestBody @Valid FolderWithSelectedFolderStatusRequest request) {
+        final FolderStatus folderStatus = FolderStatus.valueOf(request.getFolderStatusLabel());
+
+        final List<Folder> folders = folderService.fetchAllFoldersWithSelectedFolderStatusId(folderStatus);
 
         if (folders.size() == 0) {
             return ResponseEntity
