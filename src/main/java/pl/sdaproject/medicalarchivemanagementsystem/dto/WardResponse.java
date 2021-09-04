@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
+
 /**
  * WardResponse
  *
@@ -16,7 +18,10 @@ import lombok.NoArgsConstructor;
 @Builder
 public class WardResponse {
 
+    @NotBlank (message = "id problem_response")
     private Long id;
+    @NotBlank(message = "Ward name can't be null.")
     private String name;
+    @NotBlank(message = "Ward abbreviation can't be null.")
     private String abbreviation;
 }
