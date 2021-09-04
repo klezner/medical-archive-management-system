@@ -1,9 +1,6 @@
 package pl.sdaproject.medicalarchivemanagementsystem.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.validator.constraints.pl.PESEL;
 
 import javax.persistence.*;
@@ -15,17 +12,17 @@ import java.util.Set;
 @NoArgsConstructor
 @Builder
 @Getter
+@Setter
 public class Patient {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank
+    @NotBlank(message = "First name can't be null")
     private String firstName;
-    @NotBlank
+    @NotBlank(message = "Last name can't be null")
     private String lastName;
-    @NotBlank
-    @PESEL
+    @PESEL(message = "Wrong pesel")
     private String pesel;
     @OneToOne
     private Address address;
