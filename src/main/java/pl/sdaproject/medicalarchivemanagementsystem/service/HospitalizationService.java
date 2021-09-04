@@ -42,6 +42,7 @@ public class HospitalizationService {
         hospitalization.setWard(ward);
         hospitalization.setHospitalizationFrom(hospitalizationFrom);
         hospitalization.setHospitalizationTo(hospitalizationTo);
-        return hospitalization;
+        return hospitalizationRepository.save(hospitalization);
+
     }
 }
