@@ -18,10 +18,7 @@ import javax.validation.constraints.NotBlank;
 @Builder
 public class WardResponse {
 
-    @NotBlank (message = "id problem_response")
     private Long id;
-    @NotBlank(message = "Ward name can't be null.")
     private String name;
-    @NotBlank(message = "Ward abbreviation can't be null.")
     private String abbreviation;
 }
