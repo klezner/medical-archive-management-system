@@ -4,15 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.sdaproject.medicalarchivemanagementsystem.dto.FolderRequest;
-import pl.sdaproject.medicalarchivemanagementsystem.dto.FolderResponse;
-import pl.sdaproject.medicalarchivemanagementsystem.dto.FolderWithArchiveCategoryIdRequest;
-import pl.sdaproject.medicalarchivemanagementsystem.dto.FolderWithSelectedFolderStatusRequest;
+import pl.sdaproject.medicalarchivemanagementsystem.dto.*;
 import pl.sdaproject.medicalarchivemanagementsystem.mapper.FolderMapper;
-import pl.sdaproject.medicalarchivemanagementsystem.model.ArchiveCategory;
-import pl.sdaproject.medicalarchivemanagementsystem.model.Folder;
-import pl.sdaproject.medicalarchivemanagementsystem.model.FolderStatus;
-import pl.sdaproject.medicalarchivemanagementsystem.model.Hospitalization;
+import pl.sdaproject.medicalarchivemanagementsystem.model.*;
 import pl.sdaproject.medicalarchivemanagementsystem.service.ArchiveCategoryService;
 import pl.sdaproject.medicalarchivemanagementsystem.service.FolderService;
 import pl.sdaproject.medicalarchivemanagementsystem.service.HospitalizationService;
@@ -128,7 +122,7 @@ public class FolderController {
     public ResponseEntity<List<FolderResponse>> getAllFoldersWithSelectedFolderStatus(@RequestBody @Valid FolderWithSelectedFolderStatusRequest request) {
         final FolderStatus folderStatus = FolderStatus.valueOf(request.getFolderStatusLabel());
 
-        final List<Folder> folders = folderService.fetchAllFoldersWithSelectedFolderStatusId(folderStatus);
+        final List<Folder> folders = folderService.fetchAllFoldersWithSelectedFolderStatus(folderStatus);
 
         if (folders.size() == 0) {
             return ResponseEntity
@@ -140,6 +134,25 @@ public class FolderController {
                     .body(folders.stream()
                             .map(folderMapper::mapFolderToFolderResponse)
                             .collect(Collectors.toList()));
+        }
+    }
+
+    @PostMapping(path = "folderType")
+    public ResponseEntity<List<FolderResponse>> getAllFoldersWithSelectedFolderType(@RequestBody @Valid FolderWithSelectedFolderTypeRequest request) {
+        final FolderType folderType = FolderType.valueOf(request.getFolderTypeLabel());
+
+        final List<Folder> folders = folderService.fetchAllFoldersWithSelectedFolderType(folderType);
+
+        if (folders.size() == 0) {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(new ArrayList<>());
+        } else {
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(folders.stream()
+                    .map(folderMapper::mapFolderToFolderResponse)
+                    .collect(Collectors.toList()));
         }
     }
 }
