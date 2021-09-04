@@ -7,10 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.sdaproject.medicalarchivemanagementsystem.dto.*;
 import pl.sdaproject.medicalarchivemanagementsystem.mapper.FolderMapper;
 import pl.sdaproject.medicalarchivemanagementsystem.model.*;
-import pl.sdaproject.medicalarchivemanagementsystem.service.ArchiveCategoryService;
-import pl.sdaproject.medicalarchivemanagementsystem.service.FolderService;
-import pl.sdaproject.medicalarchivemanagementsystem.service.HospitalizationService;
-import pl.sdaproject.medicalarchivemanagementsystem.service.LocationService;
+import pl.sdaproject.medicalarchivemanagementsystem.service.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -22,6 +19,7 @@ import java.util.stream.Collectors;
 @RequestMapping(path = "/folder")
 public class FolderController {
 
+    private final PatientService patientService;
     private final LocationService locationService;
     private final HospitalizationService hospitalizationService;
     private final ArchiveCategoryService archiveCategoryService;
@@ -153,6 +151,29 @@ public class FolderController {
             return ResponseEntity
                     .status(HttpStatus.OK)
                     .body(folders.stream()
+                            .map(folderMapper::mapFolderToFolderResponse)
+                            .collect(Collectors.toList()));
+        }
+    }
+
+    @PostMapping(path = "/patientandhospitalization")
+    public ResponseEntity<List<FolderResponse>> getAllFoldersWithPatientAndHospitalization(@RequestBody @Valid FolderWithPatientAndHospitalizationRequest request) {
+        final Patient patient = patientService.fetchPatient(request.getPatientId());
+
+        final List<Folder> folders = folderService.fetchAllFoldersWithPatient(patient);
+
+        final List<Folder> collect = folders.stream()
+                .filter(folder -> folder.getHospitalization().getId() == request.getHospitalizationId())
+                .collect(Collectors.toList());
+
+        if (collect.size() == 0) {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(new ArrayList<>());
+        } else {
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(collect.stream()
                             .map(folderMapper::mapFolderToFolderResponse)
                             .collect(Collectors.toList()));
         }
