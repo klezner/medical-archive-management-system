@@ -12,6 +12,7 @@ import java.util.NoSuchElementException;
 @Service
 @RequiredArgsConstructor
 public class LocationService {
+
     private final FolderService folderService;
     private final LocationRepository locationRepository;
 
@@ -35,13 +36,13 @@ public class LocationService {
     }
 
     @Transactional
-    public Location editLocation(Long id, String roomNumber, Integer floor, Long folderId) {
+    public Location editLocation(Long id, String roomNumber, Integer floor) {
         final Location location = locationRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Location with: " + id + " not found."));
 
         location.setFloor(floor);
         location.setRoomNumber(roomNumber);
-        location.setFolders(folderService.fetchFolder(folderId));
+        location.setFolders(folderService.fetchFolder(id));
 
         return locationRepository.save(location);
     }

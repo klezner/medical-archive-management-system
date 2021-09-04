@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 @Entity
 @AllArgsConstructor
@@ -12,7 +13,7 @@ import javax.validation.constraints.NotNull;
 @Builder
 @Getter
 @Setter
-public class Folder {
+public class Folder implements Set<Folder> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
