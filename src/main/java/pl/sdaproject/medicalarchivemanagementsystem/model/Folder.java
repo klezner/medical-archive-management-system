@@ -13,7 +13,7 @@ import java.util.Set;
 @Builder
 @Getter
 @Setter
-public class Folder implements Set<Folder> {
+public class Folder {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
