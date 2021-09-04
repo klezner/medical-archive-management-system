@@ -2,6 +2,7 @@ package pl.sdaproject.medicalarchivemanagementsystem.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.sdaproject.medicalarchivemanagementsystem.model.Role;
 import pl.sdaproject.medicalarchivemanagementsystem.model.Staff;
 import pl.sdaproject.medicalarchivemanagementsystem.repository.StaffRepository;
@@ -41,5 +42,18 @@ public class StaffService {
     public List<Staff> fetchAllLocations() {
 
         return staffRepository.findAll();
+    }
+
+    @Transactional
+    public Staff updateStaff(Long id, String name, String surname, Role role, Long wardId) {
+        final Staff staff = staffRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Staff with id: \" + id + \" not found"));
+
+        staff.setName(name);
+        staff.setSurname(surname);
+        staff.setRole(role);
+        staff.setWard(wardService.fetchWard(wardId));
+
+        return staffRepository.save(staff);
     }
 }
