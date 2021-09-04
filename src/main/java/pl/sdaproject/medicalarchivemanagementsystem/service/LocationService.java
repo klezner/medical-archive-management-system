@@ -6,7 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.sdaproject.medicalarchivemanagementsystem.model.Location;
 import pl.sdaproject.medicalarchivemanagementsystem.repository.LocationRepository;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -43,7 +42,6 @@ public class LocationService {
 
         location.setFloor(floor);
         location.setRoomNumber(roomNumber);
-        location.setFolders(Collections.singleton(folderService.fetchFolder(id)));
 
         return locationRepository.save(location);
     }
