@@ -10,8 +10,10 @@ import pl.sdaproject.medicalarchivemanagementsystem.dto.FolderWithArchiveCategor
 import pl.sdaproject.medicalarchivemanagementsystem.mapper.FolderMapper;
 import pl.sdaproject.medicalarchivemanagementsystem.model.ArchiveCategory;
 import pl.sdaproject.medicalarchivemanagementsystem.model.Folder;
+import pl.sdaproject.medicalarchivemanagementsystem.model.Hospitalization;
 import pl.sdaproject.medicalarchivemanagementsystem.service.ArchiveCategoryService;
 import pl.sdaproject.medicalarchivemanagementsystem.service.FolderService;
+import pl.sdaproject.medicalarchivemanagementsystem.service.HospitalizationService;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -23,12 +25,20 @@ import java.util.stream.Collectors;
 @RequestMapping(path = "/folder")
 public class FolderController {
 
+    private final HospitalizationService hospitalizationService;
     private final ArchiveCategoryService archiveCategoryService;
     private final FolderMapper folderMapper;
     private final FolderService folderService;
 
     @PostMapping
     public ResponseEntity<FolderResponse> addFolder(@RequestBody @Valid FolderRequest request) {
+
+        final Hospitalization hospitalization = hospitalizationService.createHospitalization(
+                request.getHospitalizationDateFrom(),
+                request.getHospitalizationDateTo(),
+                request.getWardId()
+        );
+
         final Folder folder = folderService.createFolder(
                 request.getYear(),
                 request.getLedgerId(),
@@ -37,7 +47,7 @@ public class FolderController {
                 request.getStatusLabel().toUpperCase(),
                 request.getArchiveCategoryId(),
                 request.getLocationId(),
-                request.getHospitalizationId(),
+                hospitalization,
                 request.getPatientId()
         );
 
