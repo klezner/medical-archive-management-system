@@ -47,14 +47,15 @@ public class FolderService {
     }
 
 
-    public List<Folder> fetchAllFoldersWithArchiveCategoryId(ArchiveCategory archiveCategory) {
+    public List<Folder> fetchAllFoldersWithArchiveCategory(ArchiveCategory archiveCategory) {
 
         return folderRepository.findByArchiveCategory(archiveCategory);
     }
 
-    public List<Folder> fetchAllFoldersWithSelectedFolderStatusId(FolderStatus folderStatus) {
+    public List<Folder> fetchAllFoldersWithSelectedFolderStatus(FolderStatus folderStatus) {
 
-        return folderRepository.findByFolderStatus(folderStatus);
+        return folderRepository.findByStatus(folderStatus);
+    }
   
     @Transactional
     public Folder updateFolder(Long id, Integer year, Integer ledgerId, Integer numberOfFolders, String typeLabel, String statusLabel, Long archiveCategoryId, Long locationId, LocalDate hospitalizationDateFrom, LocalDate hospitalizationDateTo, Long patientId) {
@@ -73,5 +74,10 @@ public class FolderService {
         folder.setPatient(patientService.fetchPatient(patientId));
 
         return folderRepository.save(folder);
+    }
+
+    public List<Folder> fetchAllFoldersWithLocation(Location location) {
+
+        return folderRepository.findByLocation(location);
     }
 }
