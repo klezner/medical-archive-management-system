@@ -13,7 +13,6 @@ import java.util.NoSuchElementException;
 @RequiredArgsConstructor
 public class LocationService {
 
-    private final FolderService folderService;
     private final LocationRepository locationRepository;
 
     public Location createLocation(String roomNumber, Integer floor) {
