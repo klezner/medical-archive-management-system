@@ -14,7 +14,6 @@ import java.util.NoSuchElementException;
 @RequiredArgsConstructor
 public class LocationService {
 
-    private final FolderService folderService;
     private final LocationRepository locationRepository;
 
     public Location createLocation(String roomNumber, Integer floor) {
@@ -43,7 +42,6 @@ public class LocationService {
 
         location.setFloor(floor);
         location.setRoomNumber(roomNumber);
-        location.setFolders(Collections.singleton(folderService.fetchFolder(id)));
 
         return locationRepository.save(location);
     }

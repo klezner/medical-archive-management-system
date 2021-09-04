@@ -9,5 +9,5 @@ import java.util.Optional;
 @Repository
 public interface ArchiveCategoryRepository extends JpaRepository<ArchiveCategory, Long> {
 
-    Optional<ArchiveCategory> findByCategoryNameAndStoragePeriodYears(String archiveCategory, Integer storagePeriodYears);
+    Optional<ArchiveCategory> findByCategoryNameAndStorageYears(String archiveCategory, Integer storagePeriodYears);
 }

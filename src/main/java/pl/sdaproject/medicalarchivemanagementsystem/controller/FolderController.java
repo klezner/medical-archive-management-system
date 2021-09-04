@@ -84,6 +84,27 @@ public class FolderController {
         }
     }
 
+    @PutMapping
+    public ResponseEntity<FolderResponse> editFolder(@RequestBody @Valid FolderRequest request) {
+        final Folder folder = folderService.updateFolder(
+                request.getId(),
+                request.getYear(),
+                request.getLedgerId(),
+                request.getNumberOfFolders(),
+                request.getTypeLabel().toUpperCase(),
+                request.getStatusLabel().toUpperCase(),
+                request.getArchiveCategoryId(),
+                request.getLocationId(),
+                request.getHospitalizationDateFrom(),
+                request.getHospitalizationDateTo(),
+                request.getPatientId()
+        );
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(folderMapper.mapFolderToFolderResponse(folder));
+    }
+
     @PostMapping(path = "archiveCategory")
     public ResponseEntity<List<FolderResponse>> getAllFoldersWithArchiveCategoryId(@RequestBody @Valid FolderWithArchiveCategoryIdRequest request) {
         final ArchiveCategory archiveCategory = archiveCategoryService.fetchArchiveCategory(request.getArchiveCategoryId());
