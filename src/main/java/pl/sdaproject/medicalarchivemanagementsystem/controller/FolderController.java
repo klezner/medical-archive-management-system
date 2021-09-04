@@ -7,10 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.sdaproject.medicalarchivemanagementsystem.dto.*;
 import pl.sdaproject.medicalarchivemanagementsystem.mapper.FolderMapper;
 import pl.sdaproject.medicalarchivemanagementsystem.model.*;
-import pl.sdaproject.medicalarchivemanagementsystem.service.ArchiveCategoryService;
-import pl.sdaproject.medicalarchivemanagementsystem.service.FolderService;
-import pl.sdaproject.medicalarchivemanagementsystem.service.HospitalizationService;
-import pl.sdaproject.medicalarchivemanagementsystem.service.LocationService;
+import pl.sdaproject.medicalarchivemanagementsystem.service.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;

@@ -46,7 +46,6 @@ public class FolderService {
         return folderRepository.findAll();
     }
 
-
     public List<Folder> fetchAllFoldersWithArchiveCategory(ArchiveCategory archiveCategory) {
 
         return folderRepository.findByArchiveCategory(archiveCategory);
@@ -56,7 +55,7 @@ public class FolderService {
 
         return folderRepository.findByStatus(folderStatus);
     }
-  
+
     @Transactional
     public Folder updateFolder(Long id, Integer year, Integer ledgerId, Integer numberOfFolders, String typeLabel, String statusLabel, Long archiveCategoryId, Long locationId, LocalDate hospitalizationDateFrom, LocalDate hospitalizationDateTo, Long patientId) {
         final Folder folder = folderRepository.findById(id)
