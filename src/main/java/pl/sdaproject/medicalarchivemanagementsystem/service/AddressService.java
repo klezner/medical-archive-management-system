@@ -2,10 +2,10 @@ package pl.sdaproject.medicalarchivemanagementsystem.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.sdaproject.medicalarchivemanagementsystem.model.Address;
 import pl.sdaproject.medicalarchivemanagementsystem.repository.AddressRepository;
 
-import javax.transaction.Transactional;
 import java.util.NoSuchElementException;
 
 @Service
@@ -41,6 +41,6 @@ public class AddressService {
         address.setCity(city);
         address.setZipCode(zipCode);
 
-        return address;
+        return addressRepository.save(address);
     }
 }

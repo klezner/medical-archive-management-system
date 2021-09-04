@@ -14,17 +14,18 @@ import java.util.Set;
 @NoArgsConstructor
 @Builder
 @Getter
+@Setter
 public class ArchiveCategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank
+    @NotBlank(message = "Category name can't be null")
     @Pattern(regexp = "[A-Z]+")
     private String categoryName;
-    @NotNull
+    @NotNull(message = "Storage years can't be null")
     @Min(1)
-    private Integer storagePeriodYears;
+    private Integer storageYears;
     @OneToMany(mappedBy = "archiveCategory")
     private Set<Folder> folders;
 }

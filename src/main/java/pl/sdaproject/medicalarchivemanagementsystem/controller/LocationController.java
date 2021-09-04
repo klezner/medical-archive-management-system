@@ -57,4 +57,14 @@ public class LocationController {
                             .collect(Collectors.toList()));
         }
     }
+
+    @PutMapping
+    public ResponseEntity<LocationResponse> editLocation(@RequestBody @Valid LocationRequest request) {
+        final Location location = locationService.editLocation(
+                request.getId(),
+                request.getRoomNumber(),
+                request.getFloor());
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(locationMapper.mapLocationToLocationResponse(location));
+    }
 }

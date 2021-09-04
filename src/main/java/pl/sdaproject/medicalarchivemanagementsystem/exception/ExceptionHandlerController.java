@@ -2,8 +2,10 @@ package pl.sdaproject.medicalarchivemanagementsystem.exception;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.validation.ConstraintViolationException;
@@ -15,8 +17,13 @@ public class ExceptionHandlerController {
 
     @ExceptionHandler(HospitalizationDateException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public void handleHospitalizationDateException(HospitalizationDateException e) {
+    @ResponseBody
+    public ResponseEntity<HospitalizationExceptionResponse> handleHospitalizationDateException(HospitalizationDateException e) {
         log.warn(e.getMessage());
+
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(new HospitalizationExceptionResponse(HttpStatus.BAD_REQUEST.value(), e.getMessage()));
     }
 
     @ExceptionHandler(ConstraintViolationException.class)

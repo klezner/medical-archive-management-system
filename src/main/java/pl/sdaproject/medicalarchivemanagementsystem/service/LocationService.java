@@ -2,6 +2,7 @@ package pl.sdaproject.medicalarchivemanagementsystem.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.sdaproject.medicalarchivemanagementsystem.model.Location;
 import pl.sdaproject.medicalarchivemanagementsystem.repository.LocationRepository;
 
@@ -11,6 +12,8 @@ import java.util.NoSuchElementException;
 @Service
 @RequiredArgsConstructor
 public class LocationService {
+
+    private final FolderService folderService;
     private final LocationRepository locationRepository;
 
     public Location createLocation(String roomNumber, Integer floor) {
@@ -24,11 +27,23 @@ public class LocationService {
     public Location fetchLocation(Long id) {
 
         return locationRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("Location with id: " + id + " doesn't exist."));
+                .orElseThrow(() -> new NoSuchElementException("Location with id: " + id + " not found."));
     }
 
     public List<Location> fetchAllLocations() {
 
         return locationRepository.findAll();
+    }
+
+    @Transactional
+    public Location editLocation(Long id, String roomNumber, Integer floor) {
+        final Location location = locationRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Location with: " + id + " not found."));
+
+        location.setFloor(floor);
+        location.setRoomNumber(roomNumber);
+        location.setFolders(folderService.fetchFolder(id));
+
+        return locationRepository.save(location);
     }
 }

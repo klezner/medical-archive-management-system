@@ -16,14 +16,14 @@ public class HospitalizationDateValidator {
         return true;
     }
 
-    private static boolean validateStartDate(LocalDate startDate) {
+    public static boolean validateStartDate(LocalDate startDate) {
         if (!startDate.isAfter(MINIMUM_DATE)) {
             throw new HospitalizationDateException("Wrong begin date. Should be after: " + MINIMUM_DATE.toString());
         }
         return startDate.isAfter(MINIMUM_DATE);
     }
 
-    private static boolean validateEndDate(LocalDate startDate, LocalDate endDate) {
+    public static boolean validateEndDate(LocalDate startDate, LocalDate endDate) {
         if (endDate.isBefore(startDate)) {
             throw new HospitalizationDateException("Wrong end date. Should be after: " + startDate.toString());
         }
