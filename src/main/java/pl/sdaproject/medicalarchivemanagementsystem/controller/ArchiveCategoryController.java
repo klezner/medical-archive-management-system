@@ -8,7 +8,6 @@ import pl.sdaproject.medicalarchivemanagementsystem.dto.ArchiveCategoryRequest;
 import pl.sdaproject.medicalarchivemanagementsystem.dto.ArchiveCategoryResponse;
 import pl.sdaproject.medicalarchivemanagementsystem.mapper.ArchiveCategoryMapper;
 import pl.sdaproject.medicalarchivemanagementsystem.model.ArchiveCategory;
-import pl.sdaproject.medicalarchivemanagementsystem.model.Patient;
 import pl.sdaproject.medicalarchivemanagementsystem.service.ArchiveCategoryService;
 
 import javax.validation.Valid;
@@ -28,7 +27,7 @@ public class ArchiveCategoryController {
     public ResponseEntity<ArchiveCategoryResponse> addArchiveCategory(@RequestBody @Valid ArchiveCategoryRequest request) {
         final ArchiveCategory archiveCategory = archiveCategoryService.createArchiveCategory(
                 request.getCategoryName(),
-                request.getStoragePeriodYears());
+                request.getStorageYears());
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(archiveCategoryMapper.mapArchiveCategoryToArchiveCategoryResponse(archiveCategory));
@@ -58,4 +57,17 @@ public class ArchiveCategoryController {
                             .collect(Collectors.toList()));
         }
     }
+
+    @PutMapping
+    public ResponseEntity<ArchiveCategoryResponse> editArchiveCategory(@RequestBody @Valid ArchiveCategoryRequest request) {
+        final ArchiveCategory archiveCategory = archiveCategoryService.editArchiveCategory(
+                request.getId(),
+                request.getCategoryName(),
+                request.getStorageYears());
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(archiveCategoryMapper.mapArchiveCategoryToArchiveCategoryResponse(archiveCategory));
+    }
+
 }
