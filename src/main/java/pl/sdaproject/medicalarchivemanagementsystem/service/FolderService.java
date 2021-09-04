@@ -3,11 +3,10 @@ package pl.sdaproject.medicalarchivemanagementsystem.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.sdaproject.medicalarchivemanagementsystem.model.Folder;
-import pl.sdaproject.medicalarchivemanagementsystem.model.FolderStatus;
-import pl.sdaproject.medicalarchivemanagementsystem.model.FolderType;
+import pl.sdaproject.medicalarchivemanagementsystem.model.*;
 import pl.sdaproject.medicalarchivemanagementsystem.repository.FolderRepository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -16,12 +15,11 @@ import java.util.NoSuchElementException;
 public class FolderService {
 
     private final PatientService patientService;
-    private final HospitalizationService hospitalizationService;
     private final LocationService locationService;
     private final ArchiveCategoryService archiveCategoryService;
     private final FolderRepository folderRepository;
 
-    public Folder createFolder(Integer year, Integer ledgerId, Integer numberOfFolders, String typeLabel, String statusLabel, Long archiveCategoryId, Long locationId, Long hospitalizationId, Long patientId) {
+    public Folder createFolder(Integer year, Integer ledgerId, Integer numberOfFolders, String typeLabel, String statusLabel, Long archiveCategoryId, Long locationId, Hospitalization hospitalization, Long patientId) {
         final Folder folder = Folder.builder()
                 .year(year)
                 .ledgerId(ledgerId)
@@ -30,7 +28,7 @@ public class FolderService {
                 .status(FolderStatus.valueOf(statusLabel))
                 .archiveCategory(archiveCategoryService.fetchArchiveCategory(archiveCategoryId))
                 .location(locationService.fetchLocation(locationId))
-                .hospitalization(hospitalizationService.fetchHospitalization(hospitalizationId))
+                .hospitalization(hospitalization)
                 .patient(patientService.fetchPatient(patientId))
                 .build();
 
@@ -39,7 +37,8 @@ public class FolderService {
 
     public Folder fetchFolder(Long id) {
 
-        return folderRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Folder with id: " + id + " not found"));
+        return folderRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Folder with id: " + id + " not found"));
     }
 
     public List<Folder> fetchAllFolders() {
@@ -47,8 +46,14 @@ public class FolderService {
         return folderRepository.findAll();
     }
 
+
+    public List<Folder> fetchAllFoldersWithArchiveCategoryId(ArchiveCategory archiveCategory) {
+
+        return folderRepository.findByArchiveCategory(archiveCategory);
+    }
+
     @Transactional
-    public Folder updateFolder(Long id, Integer year, Integer ledgerId, Integer numberOfFolders, String typeLabel, String statusLabel, Long archiveCategoryId, Long locationId, Long hospitalizationId, Long patientId) {
+    public Folder updateFolder(Long id, Integer year, Integer ledgerId, Integer numberOfFolders, String typeLabel, String statusLabel, Long archiveCategoryId, Long locationId, LocalDate hospitalizationDateFrom, LocalDate hospitalizationDateTo, Long patientId) {
         final Folder folder = folderRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Folder with id: " + id + " not found"));
 
@@ -59,7 +64,8 @@ public class FolderService {
         folder.setStatus(FolderStatus.valueOf(statusLabel));
         folder.setArchiveCategory(archiveCategoryService.fetchArchiveCategory(archiveCategoryId));
         folder.setLocation(locationService.fetchLocation(locationId));
-        folder.setHospitalization(hospitalizationService.fetchHospitalization(hospitalizationId));
+        folder.getHospitalization().setHospitalizationFrom(hospitalizationDateFrom);
+        folder.getHospitalization().setHospitalizationTo(hospitalizationDateTo);
         folder.setPatient(patientService.fetchPatient(patientId));
 
         return folderRepository.save(folder);
