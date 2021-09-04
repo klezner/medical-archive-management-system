@@ -1,7 +1,6 @@
 package pl.sdaproject.medicalarchivemanagementsystem.service;
 
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.sdaproject.medicalarchivemanagementsystem.model.ArchiveCategory;
@@ -18,7 +17,7 @@ public class ArchiveCategoryService {
 
     public ArchiveCategory createArchiveCategory(String categoryName, Integer storageYears) {
 
-        return archiveCategoryRepository.findByCategoryNameAndStoragePeriodYears(categoryName, storageYears)
+        return archiveCategoryRepository.findByCategoryNameAndStorageYears(categoryName, storageYears)
                 .orElseGet(() -> archiveCategoryRepository.save(
                         ArchiveCategory.builder().categoryName(categoryName).storageYears(storageYears).build())
                 );

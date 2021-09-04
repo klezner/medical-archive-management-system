@@ -17,7 +17,7 @@ public class FolderMapper {
                 .typeLabel(folder.getType().getLabel())
                 .statusLabel(folder.getStatus().getLabel())
                 .categoryName(folder.getArchiveCategory().getCategoryName())
-                .storagePeriodYears(folder.getArchiveCategory().getStoragePeriodYears())
+                .storagePeriodYears(folder.getArchiveCategory().getStorageYears())
                 .roomNumber(folder.getLocation().getRoomNumber())
                 .floor(folder.getLocation().getFloor())
                 .hospitalizationFrom(folder.getHospitalization().getHospitalizationFrom())
