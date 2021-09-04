@@ -2,6 +2,7 @@ package pl.sdaproject.medicalarchivemanagementsystem.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import pl.sdaproject.medicalarchivemanagementsystem.model.ArchiveCategory;
 import pl.sdaproject.medicalarchivemanagementsystem.model.Folder;
 import pl.sdaproject.medicalarchivemanagementsystem.model.FolderStatus;
 import pl.sdaproject.medicalarchivemanagementsystem.model.FolderType;
@@ -44,5 +45,10 @@ public class FolderService {
     public List<Folder> fetchAllFolders() {
 
         return folderRepository.findAll();
+    }
+
+    public List<Folder> fetchAllFoldersWithArchiveCategoryId(ArchiveCategory archiveCategory) {
+
+        return folderRepository.findByArchiveCategory(archiveCategory);
     }
 }
