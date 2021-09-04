@@ -52,4 +52,9 @@ public class FolderService {
 
         return folderRepository.findByArchiveCategory(archiveCategory);
     }
+
+    public List<Folder> fetchAllFoldersWithSelectedFolderStatusId(FolderStatus folderStatus) {
+
+        return folderRepository.findByFolderStatus(folderStatus);
+    }
 }
