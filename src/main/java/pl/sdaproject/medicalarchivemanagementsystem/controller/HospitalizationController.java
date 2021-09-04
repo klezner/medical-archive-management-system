@@ -6,9 +6,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.sdaproject.medicalarchivemanagementsystem.dto.HospitalizationRequest;
 import pl.sdaproject.medicalarchivemanagementsystem.dto.HospitalizationResponse;
+import pl.sdaproject.medicalarchivemanagementsystem.dto.WardRequest;
+import pl.sdaproject.medicalarchivemanagementsystem.dto.WardResponse;
 import pl.sdaproject.medicalarchivemanagementsystem.mapper.HospitalizationMapper;
 import pl.sdaproject.medicalarchivemanagementsystem.model.Hospitalization;
+import pl.sdaproject.medicalarchivemanagementsystem.model.Ward;
 import pl.sdaproject.medicalarchivemanagementsystem.service.HospitalizationService;
+import pl.sdaproject.medicalarchivemanagementsystem.service.WardService;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
@@ -20,6 +24,9 @@ public class HospitalizationController {
 
     @Autowired
     private HospitalizationService hospitalizationService;
+
+    @Autowired
+    private WardService wardService;
 
     @Autowired
     private HospitalizationMapper hospitalizationMapper;
@@ -48,5 +55,18 @@ public class HospitalizationController {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(responseBody);
+    }
+
+    @PutMapping("/hospitalization")
+    public ResponseEntity<HospitalizationResponse> editHospitalization(@RequestBody @Valid HospitalizationRequest request) {
+        final Hospitalization hospitalization = hospitalizationService.updateHospitalization(
+                request.getId(),
+                request.getHospitalizationDateFrom(),
+                request.getHospitalizationDateTo(),
+                wardService.fetchWard(request.getWardId())
+        );
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(hospitalizationMapper.mapHospitalizationToHospitalizationResponse(hospitalization));
     }
 }
