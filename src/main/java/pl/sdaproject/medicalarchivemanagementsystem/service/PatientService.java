@@ -53,4 +53,9 @@ public class PatientService {
 
         return patientRepository.save(patient);
     }
+
+    public Patient fetchPatientWithPeselOrNameAndSurname(String pesel, String name, String surname) {
+
+        return patientRepository.findByPeselOrFirstNameAndLastName(pesel, name, surname);
+    }
 }
