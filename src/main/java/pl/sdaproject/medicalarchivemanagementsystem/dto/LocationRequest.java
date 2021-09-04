@@ -11,9 +11,10 @@ import javax.validation.constraints.Pattern;
 @Builder
 public class LocationRequest {
 
-    @NotBlank
+    private Long id;
+    @NotBlank(message = "Room number can't be null")
     @Pattern(regexp = "[0-9]{1,3}")
     private String roomNumber;
-    @NotNull
+    @NotNull(message = "Floor can't be null")
     private Integer floor;
 }

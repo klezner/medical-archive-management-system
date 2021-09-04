@@ -1,9 +1,6 @@
 package pl.sdaproject.medicalarchivemanagementsystem.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -16,15 +13,16 @@ import java.util.Set;
 @NoArgsConstructor
 @Builder
 @Getter
+@Setter
 public class Location {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank
+    @NotBlank(message = "Room number can't be null")
     @Pattern(regexp = "[0-9]{1,3}")
     private String roomNumber;
-    @NotNull
+    @NotNull(message = "Floor can't be null")
     private Integer floor;
     @OneToMany(mappedBy = "location")
     private Set<Folder> folders;
