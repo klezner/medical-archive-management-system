@@ -167,10 +167,16 @@ public class FolderController {
                         .filter(folder -> folder.getPatient().getId() == request.getPatientId()))
                 .collect(Collectors.toList());
 
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(folders.stream()
-                        .map(folderMapper::mapFolderToFolderResponse)
-                        .collect(Collectors.toList()));
+        if (folders.size() == 0) {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(new ArrayList<>());
+        } else {
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(folders.stream()
+                            .map(folderMapper::mapFolderToFolderResponse)
+                            .collect(Collectors.toList()));
+        }
     }
 }
