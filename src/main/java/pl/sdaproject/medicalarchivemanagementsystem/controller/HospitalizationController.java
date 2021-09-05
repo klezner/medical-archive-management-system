@@ -6,11 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.sdaproject.medicalarchivemanagementsystem.dto.HospitalizationRequest;
 import pl.sdaproject.medicalarchivemanagementsystem.dto.HospitalizationResponse;
-import pl.sdaproject.medicalarchivemanagementsystem.dto.WardRequest;
-import pl.sdaproject.medicalarchivemanagementsystem.dto.WardResponse;
 import pl.sdaproject.medicalarchivemanagementsystem.mapper.HospitalizationMapper;
 import pl.sdaproject.medicalarchivemanagementsystem.model.Hospitalization;
-import pl.sdaproject.medicalarchivemanagementsystem.model.Ward;
 import pl.sdaproject.medicalarchivemanagementsystem.service.HospitalizationService;
 import pl.sdaproject.medicalarchivemanagementsystem.service.WardService;
 
@@ -30,7 +27,6 @@ public class HospitalizationController {
 
     @Autowired
     private HospitalizationMapper hospitalizationMapper;
-
 
     @GetMapping(path = "/hospitalization/{id}")
     public ResponseEntity<HospitalizationResponse> getHospitalization(@PathVariable Long id) {

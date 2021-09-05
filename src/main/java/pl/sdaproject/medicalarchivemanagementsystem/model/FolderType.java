@@ -1,6 +1,7 @@
 package pl.sdaproject.medicalarchivemanagementsystem.model;
 
 public enum FolderType {
+
     ENVELOPE("Envelope"),
     FOLDER("Folder"),
     BINDER("Binder"),

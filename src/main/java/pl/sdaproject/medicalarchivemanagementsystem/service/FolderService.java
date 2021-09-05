@@ -46,7 +46,6 @@ public class FolderService {
         return folderRepository.findAll();
     }
 
-
     public List<Folder> fetchAllFoldersWithArchiveCategory(ArchiveCategory archiveCategory) {
 
         return folderRepository.findByArchiveCategory(archiveCategory);

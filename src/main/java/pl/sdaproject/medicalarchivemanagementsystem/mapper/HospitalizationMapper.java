@@ -6,6 +6,7 @@ import pl.sdaproject.medicalarchivemanagementsystem.model.Hospitalization;
 
 @Component
 public class HospitalizationMapper {
+
     public HospitalizationResponse mapHospitalizationToHospitalizationResponse(Hospitalization hospitalization) {
 
         return HospitalizationResponse.builder()

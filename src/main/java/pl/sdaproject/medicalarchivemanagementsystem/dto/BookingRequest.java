@@ -3,8 +3,6 @@ package pl.sdaproject.medicalarchivemanagementsystem.dto;
 import lombok.Getter;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
