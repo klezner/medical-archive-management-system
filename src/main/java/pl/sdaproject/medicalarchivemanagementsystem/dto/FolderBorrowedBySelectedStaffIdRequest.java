@@ -6,6 +6,7 @@ import javax.validation.constraints.NotNull;
 
 @Getter
 public class FolderBorrowedBySelectedStaffIdRequest {
+
     @NotNull
     private Long staffId;
 }

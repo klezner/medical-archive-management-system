@@ -6,6 +6,7 @@ import javax.validation.constraints.NotNull;
 
 @Getter
 public class FolderWithArchiveCategoryRequest {
+
     @NotNull
     private Long archiveCategoryId;
 }

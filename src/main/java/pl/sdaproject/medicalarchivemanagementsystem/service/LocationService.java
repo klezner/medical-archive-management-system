@@ -19,14 +19,13 @@ public class LocationService {
 
         return locationRepository.findByRoomNumber(roomNumber)
                 .orElseGet(() -> locationRepository.save(
-                        Location.builder().roomNumber(roomNumber).floor(floor).build()
-                ));
+                        Location.builder().roomNumber(roomNumber).floor(floor).build()));
     }
 
     public Location fetchLocation(Long id) {
 
         return locationRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("Location with id: " + id + " not found."));
+                .orElseThrow(() -> new NoSuchElementException("Location with id: " + id + " not found"));
     }
 
     public List<Location> fetchAllLocations() {
@@ -37,7 +36,7 @@ public class LocationService {
     @Transactional
     public Location editLocation(Long id, String roomNumber, Integer floor) {
         final Location location = locationRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("Location with: " + id + " not found."));
+                .orElseThrow(() -> new NoSuchElementException("Location with: " + id + " not found"));
 
         location.setFloor(floor);
         location.setRoomNumber(roomNumber);

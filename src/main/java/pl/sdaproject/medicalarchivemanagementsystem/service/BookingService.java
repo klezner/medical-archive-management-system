@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.sdaproject.medicalarchivemanagementsystem.model.Booking;
 import pl.sdaproject.medicalarchivemanagementsystem.model.FolderStatus;
-import pl.sdaproject.medicalarchivemanagementsystem.model.Patient;
 import pl.sdaproject.medicalarchivemanagementsystem.model.Staff;
 import pl.sdaproject.medicalarchivemanagementsystem.repository.BookingRepository;
 

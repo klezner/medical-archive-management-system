@@ -8,9 +8,7 @@ import pl.sdaproject.medicalarchivemanagementsystem.dto.*;
 import pl.sdaproject.medicalarchivemanagementsystem.mapper.BookingMapper;
 import pl.sdaproject.medicalarchivemanagementsystem.mapper.FolderMapper;
 import pl.sdaproject.medicalarchivemanagementsystem.model.*;
-import pl.sdaproject.medicalarchivemanagementsystem.mapper.BookingMapper;
 import pl.sdaproject.medicalarchivemanagementsystem.service.BookingService;
-import pl.sdaproject.medicalarchivemanagementsystem.service.FolderService;
 import pl.sdaproject.medicalarchivemanagementsystem.service.StaffService;
 
 import javax.validation.Valid;
@@ -20,7 +18,6 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "/booking")
 public class BookingController {
 
     private final BookingMapper bookingMapper;
@@ -28,7 +25,7 @@ public class BookingController {
     private final BookingService bookingService;
     private final StaffService staffService;
 
-    @PostMapping
+    @PostMapping(path = "/booking")
     public ResponseEntity<BookingResponse> addBooking(@RequestBody @Valid BookingRequest request) {
         final Booking booking = bookingService.createBooking(
                 request.getFolderId(),
@@ -40,7 +37,7 @@ public class BookingController {
                 .body(bookingMapper.mapBookingToBookingResponse(booking));
     }
 
-    @PatchMapping
+    @PatchMapping(path = "/booking")
     public ResponseEntity<BookingResponse> addReturnDateToBooking(@RequestBody @Valid BookingRequest request) {
         final Booking booking = bookingService.createReturn(
                 request.getReturnDate(),
@@ -51,7 +48,7 @@ public class BookingController {
                 .body(bookingMapper.mapBookingToBookingResponse(booking));
     }
 
-    @GetMapping(path = "/{id}")
+    @GetMapping(path = "/booking/{id}")
     public ResponseEntity<BookingResponse> getBooking(@PathVariable Long id) {
         final Booking booking = bookingService.fetchBooking(id);
 
@@ -60,7 +57,7 @@ public class BookingController {
                 .body(bookingMapper.mapBookingToBookingResponse(booking));
     }
 
-    @GetMapping()
+    @GetMapping(path = "/booking")
     public ResponseEntity<List<BookingResponse>> getAllBookings() {
         final List<Booking> bookings = bookingService.fetchAllBookings();
 
@@ -77,7 +74,7 @@ public class BookingController {
         }
     }
 
-    @PostMapping(path = "/staff")
+    @PostMapping(path = "/booking")
     public ResponseEntity<List<FolderResponse>> getAllFoldersBorrowedBySelectedStaffId(@RequestBody @Valid FolderBorrowedBySelectedStaffIdRequest request) {
         final Staff staff = staffService.fetchStaff(request.getStaffId());
 

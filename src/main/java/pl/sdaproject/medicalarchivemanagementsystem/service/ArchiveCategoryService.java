@@ -19,8 +19,7 @@ public class ArchiveCategoryService {
 
         return archiveCategoryRepository.findByCategoryNameAndStorageYears(categoryName, storageYears)
                 .orElseGet(() -> archiveCategoryRepository.save(
-                        ArchiveCategory.builder().categoryName(categoryName).storageYears(storageYears).build())
-                );
+                        ArchiveCategory.builder().categoryName(categoryName).storageYears(storageYears).build()));
     }
 
     public ArchiveCategory fetchArchiveCategory(Long id) {

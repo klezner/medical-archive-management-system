@@ -59,8 +59,8 @@ public class HospitalizationController {
                 request.getId(),
                 request.getHospitalizationDateFrom(),
                 request.getHospitalizationDateTo(),
-                wardService.fetchWard(request.getWardId())
-        );
+                wardService.fetchWard(request.getWardId()));
+
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(hospitalizationMapper.mapHospitalizationToHospitalizationResponse(hospitalization));

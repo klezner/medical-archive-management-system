@@ -21,7 +21,6 @@ import java.util.stream.Collectors;
  * @author MKgn
  */
 @RestController
-@RequestMapping(path = "/ward")
 public class WardController {
 
     @Autowired
@@ -50,7 +49,7 @@ public class WardController {
                 .body(responseBody);
     }
 
-    @GetMapping(path = "ward")
+    @GetMapping(path = "/ward")
     ResponseEntity<List<WardResponse>> getAllWards() {
         final List<Ward> wards = wardService.fetchAllLocations();
 
@@ -67,13 +66,13 @@ public class WardController {
         }
     }
 
-    @PutMapping
+    @PutMapping(path = "/ward")
     public ResponseEntity<WardResponse> editWard(@RequestBody @Valid WardRequest request) {
         final Ward ward = wardService.updateWard(
                 request.getId(),
                 request.getName(),
-                request.getAbbreviation()
-        );
+                request.getAbbreviation());
+
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(wardMapper.mapWardToWardResponse(ward));

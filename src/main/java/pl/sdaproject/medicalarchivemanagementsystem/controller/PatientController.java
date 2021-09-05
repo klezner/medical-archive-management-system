@@ -19,36 +19,32 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "/patient")
-@CrossOrigin(origins = "http://localhost:4200")
 public class PatientController {
 
     private final AddressService addressService;
     private final PatientMapper patientMapper;
     private final PatientService patientService;
 
-    @PostMapping
+    @PostMapping(path = "/patient")
     public ResponseEntity<PatientResponse> addPatient(@RequestBody @Valid PatientRequest request) {
         final Address address = addressService.createAddress(
                 request.getStreet(),
                 request.getNumber(),
                 request.getCity(),
-                request.getZipCode()
-        );
+                request.getZipCode());
 
         final Patient patient = patientService.createPatient(
                 request.getFirstName(),
                 request.getLastName(),
                 request.getPesel(),
-                address
-        );
+                address);
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(patientMapper.mapPatientToPatientResponse(patient));
     }
 
-    @GetMapping(path = "/{id}")
+    @GetMapping(path = "/patient/{id}")
     public ResponseEntity<PatientResponse> getPatient(@PathVariable Long id) {
         final Patient patient = patientService.fetchPatient(id);
 
@@ -57,7 +53,7 @@ public class PatientController {
                 .body(patientMapper.mapPatientToPatientResponse(patient));
     }
 
-    @GetMapping()
+    @GetMapping(path = "/patient")
     public ResponseEntity<List<PatientResponse>> getAllPatients() {
         final List<Patient> patients = patientService.fetchAllPatients();
 
@@ -74,7 +70,7 @@ public class PatientController {
         }
     }
 
-    @PutMapping
+    @PutMapping(path = "/patient")
     public ResponseEntity<PatientResponse> editPatient(@RequestBody @Valid PatientRequest request) {
         final Patient patient = patientService.updatePatient(
                 request.getId(),
@@ -84,8 +80,7 @@ public class PatientController {
                 request.getStreet(),
                 request.getNumber(),
                 request.getCity(),
-                request.getZipCode()
-        );
+                request.getZipCode());
 
         return ResponseEntity
                 .status(HttpStatus.OK)
