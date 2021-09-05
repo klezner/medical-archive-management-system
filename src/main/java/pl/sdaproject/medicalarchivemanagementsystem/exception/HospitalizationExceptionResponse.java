@@ -9,6 +9,7 @@ import lombok.Getter;
 @Getter
 @Builder
 public class HospitalizationExceptionResponse {
+
     private Integer httpStatusCode;
     private String message;
 }
