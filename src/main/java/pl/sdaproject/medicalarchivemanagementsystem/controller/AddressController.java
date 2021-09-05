@@ -14,13 +14,12 @@ import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "/address")
 public class AddressController {
 
     private final AddressMapper addressMapper;
     private final AddressService addressService;
 
-    @PostMapping
+    @PostMapping(path = "/address")
     public ResponseEntity<AddressResponse> addAddress(@RequestBody @Valid AddressRequest request) {
         final Address address = addressService.createAddress(
                 request.getStreet(),
@@ -33,7 +32,7 @@ public class AddressController {
                 .body(addressMapper.mapAddressToAddressResponse(address));
     }
 
-    @GetMapping(path = "/{id}")
+    @GetMapping(path = "/address/{id}")
     public ResponseEntity<AddressResponse> getAddress(@PathVariable Long id) {
         final Address address = addressService.fetchAddress(id);
 
@@ -42,7 +41,7 @@ public class AddressController {
                 .body(addressMapper.mapAddressToAddressResponse(address));
     }
 
-    @PutMapping
+    @PutMapping(path = "/address")
     public ResponseEntity<AddressResponse> editAddress(@RequestBody @Valid AddressRequest request) {
         final Address address = addressService.updateAddress(
                 request.getId(),

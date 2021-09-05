@@ -17,13 +17,12 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "/location")
 public class LocationController {
 
     private final LocationMapper locationMapper;
     private final LocationService locationService;
 
-    @PostMapping
+    @PostMapping(path = "/location")
     public ResponseEntity<LocationResponse> addLocation(@RequestBody @Valid LocationRequest request) {
         final Location location = locationService.createLocation(
                 request.getRoomNumber(),
@@ -33,7 +32,7 @@ public class LocationController {
                 .body(locationMapper.mapLocationToLocationResponse(location));
     }
 
-    @GetMapping(path = "/{id}")
+    @GetMapping(path = "/location/{id}")
     public ResponseEntity<LocationResponse> getLocation(@PathVariable Long id) {
         final Location location = locationService.fetchLocation(id);
         return ResponseEntity
@@ -41,7 +40,7 @@ public class LocationController {
                 .body(locationMapper.mapLocationToLocationResponse(location));
     }
 
-    @GetMapping
+    @GetMapping(path = "/location")
     public ResponseEntity<List<LocationResponse>> getAllLocations() {
         final List<Location> locations = locationService.fetchAllLocations();
 
@@ -58,7 +57,7 @@ public class LocationController {
         }
     }
 
-    @PutMapping
+    @PutMapping(path = "/location")
     public ResponseEntity<LocationResponse> editLocation(@RequestBody @Valid LocationRequest request) {
         final Location location = locationService.editLocation(
                 request.getId(),

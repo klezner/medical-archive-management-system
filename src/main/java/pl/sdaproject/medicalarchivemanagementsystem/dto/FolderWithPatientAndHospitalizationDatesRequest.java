@@ -8,6 +8,7 @@ import java.time.LocalDate;
 
 @Getter
 public class FolderWithPatientAndHospitalizationDatesRequest {
+
     @NotNull
     private Long patientId;
     @DateTimeFormat(pattern = "yyyy-MM-dd")

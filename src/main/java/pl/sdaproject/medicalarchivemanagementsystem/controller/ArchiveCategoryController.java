@@ -17,13 +17,12 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "/archiveCategory")
 public class ArchiveCategoryController {
 
     private final ArchiveCategoryMapper archiveCategoryMapper;
     private final ArchiveCategoryService archiveCategoryService;
 
-    @PostMapping
+    @PostMapping(path = "/archiveCategory")
     public ResponseEntity<ArchiveCategoryResponse> addArchiveCategory(@RequestBody @Valid ArchiveCategoryRequest request) {
         final ArchiveCategory archiveCategory = archiveCategoryService.createArchiveCategory(
                 request.getCategoryName(),
@@ -33,7 +32,7 @@ public class ArchiveCategoryController {
                 .body(archiveCategoryMapper.mapArchiveCategoryToArchiveCategoryResponse(archiveCategory));
     }
 
-    @GetMapping(path = "/{id}")
+    @GetMapping(path = "/archiveCategory/{id}")
     public ResponseEntity<ArchiveCategoryResponse> getArchiveCategory(@PathVariable Long id) {
         final ArchiveCategory archiveCategory = archiveCategoryService.fetchArchiveCategory(id);
         return ResponseEntity
@@ -41,7 +40,7 @@ public class ArchiveCategoryController {
                 .body(archiveCategoryMapper.mapArchiveCategoryToArchiveCategoryResponse(archiveCategory));
     }
 
-    @GetMapping
+    @GetMapping(path = "/archiveCategory")
     public ResponseEntity<List<ArchiveCategoryResponse>> getAllArchiveCategories() {
         final List<ArchiveCategory> archiveCategories = archiveCategoryService.fetchAllArchiveCategories();
 
@@ -58,7 +57,7 @@ public class ArchiveCategoryController {
         }
     }
 
-    @PutMapping
+    @PutMapping(path = "/archiveCategory")
     public ResponseEntity<ArchiveCategoryResponse> editArchiveCategory(@RequestBody @Valid ArchiveCategoryRequest request) {
         final ArchiveCategory archiveCategory = archiveCategoryService.editArchiveCategory(
                 request.getId(),
@@ -69,5 +68,4 @@ public class ArchiveCategoryController {
                 .status(HttpStatus.OK)
                 .body(archiveCategoryMapper.mapArchiveCategoryToArchiveCategoryResponse(archiveCategory));
     }
-
 }

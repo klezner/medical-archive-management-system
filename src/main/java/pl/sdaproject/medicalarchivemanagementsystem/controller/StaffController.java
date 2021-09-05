@@ -22,13 +22,12 @@ import java.util.stream.Collectors;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "/staff")
 public class StaffController {
 
     private final StaffMapper staffMapper;
     private final StaffService staffService;
 
-    @PostMapping
+    @PostMapping(path = "/staff")
     public ResponseEntity<StaffResponse> addStaff(@RequestBody @Valid StaffRequest request) {
         final Staff staff = staffService.createStaff(request.getName(), request.getSurname(), request.getRole(), request.getWardId());
 
@@ -37,7 +36,7 @@ public class StaffController {
                 .body(staffMapper.mapStaffToStaffResponse(staff));
     }
 
-    @GetMapping(path = "/{id}")
+    @GetMapping(path = "/staff/{id}")
     public ResponseEntity<StaffResponse> getStaff(@PathVariable Long id) {
         final Staff staff = staffService.fetchStaff(id);
 
@@ -46,7 +45,7 @@ public class StaffController {
                 .body(staffMapper.mapStaffToStaffResponse(staff));
     }
 
-    @GetMapping
+    @GetMapping(path = "/staff")
     public ResponseEntity<List<StaffResponse>> getAllLocations() {
         final List<Staff> staff = staffService.fetchAllLocations();
 
@@ -63,15 +62,14 @@ public class StaffController {
         }
     }
 
-    @PutMapping
+    @PutMapping(path = "/staff")
     public ResponseEntity<StaffResponse> editStaff(@RequestBody @Valid StaffRequest request) {
         final Staff staff = staffService.updateStaff(
                 request.getId(),
                 request.getName(),
                 request.getSurname(),
                 request.getRole(),
-                request.getWardId()
-        );
+                request.getWardId());
 
         return ResponseEntity
                 .status(HttpStatus.OK)
