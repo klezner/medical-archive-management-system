@@ -6,4 +6,6 @@ import pl.sdaproject.medicalarchivemanagementsystem.model.Patient;
 
 @Repository
 public interface PatientRepository extends JpaRepository<Patient, Long> {
+
+    Patient findByPeselOrFirstNameAndLastName(String pesel, String name, String surname);
 }

@@ -7,10 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.sdaproject.medicalarchivemanagementsystem.dto.*;
 import pl.sdaproject.medicalarchivemanagementsystem.mapper.FolderMapper;
 import pl.sdaproject.medicalarchivemanagementsystem.model.*;
-import pl.sdaproject.medicalarchivemanagementsystem.service.ArchiveCategoryService;
-import pl.sdaproject.medicalarchivemanagementsystem.service.FolderService;
-import pl.sdaproject.medicalarchivemanagementsystem.service.HospitalizationService;
-import pl.sdaproject.medicalarchivemanagementsystem.service.LocationService;
+import pl.sdaproject.medicalarchivemanagementsystem.service.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -22,6 +19,7 @@ import java.util.stream.Collectors;
 @RequestMapping(path = "/folder")
 public class FolderController {
 
+    private final PatientService patientService;
     private final LocationService locationService;
     private final HospitalizationService hospitalizationService;
     private final ArchiveCategoryService archiveCategoryService;
@@ -102,7 +100,7 @@ public class FolderController {
     }
 
     @PostMapping(path = "archiveCategory")
-    public ResponseEntity<List<FolderResponse>> getAllFoldersWithArchiveCategoryId(@RequestBody @Valid FolderWithArchiveCategoryIdRequest request) {
+    public ResponseEntity<List<FolderResponse>> getAllFoldersWithArchiveCategoryId(@RequestBody @Valid FolderWithArchiveCategoryRequest request) {
         final ArchiveCategory archiveCategory = archiveCategoryService.fetchArchiveCategory(request.getArchiveCategoryId());
 
         final List<Folder> folders = folderService.fetchAllFoldersWithArchiveCategory(archiveCategory);
@@ -157,7 +155,51 @@ public class FolderController {
                             .collect(Collectors.toList()));
         }
     }
+  
+    @PostMapping(path = "/patient")
+    public ResponseEntity<List<FolderResponse>> getAllFoldersWithPatient(@RequestBody @Valid FolderWithPatientPeselOrNameAndSurnameRequest request) {
+        final Patient patient = patientService.fetchPatientWithPeselOrNameAndSurname(
+                request.getPesel(),
+                request.getName(),
+                request.getSurname()
+        );
 
+        System.out.println(patient.toString());
+
+        final List<Folder> folders = folderService.fetchAllFoldersWithPatient(patient);
+
+        if (folders.size() == 0) {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(new ArrayList<>());
+        } else {
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(folders.stream()
+                            .map(folderMapper::mapFolderToFolderResponse)
+                            .collect(Collectors.toList()));
+        }
+    }
+
+    @PostMapping(path = "folderType")
+    public ResponseEntity<List<FolderResponse>> getAllFoldersWithSelectedFolderType(@RequestBody @Valid FolderWithSelectedFolderTypeRequest request) {
+        final FolderType folderType = FolderType.valueOf(request.getFolderTypeLabel());
+
+        final List<Folder> folders = folderService.fetchAllFoldersWithSelectedFolderType(folderType);
+
+        if (folders.size() == 0) {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(new ArrayList<>());
+        } else {
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(folders.stream()
+                    .map(folderMapper::mapFolderToFolderResponse)
+                    .collect(Collectors.toList()));
+        }
+    }
+  
     @PostMapping(path = "/patientandhospitalization")
     public ResponseEntity<List<FolderResponse>> getAllFoldersWithPatientAndHospitalization(@RequestBody @Valid FolderWithPatientAndHospitalizationDatesRequest request) {
         final List<Hospitalization> hospitalizations = hospitalizationService.fetchAllHospitalizationsByDates(request.getHospitalizationDateFrom(), request.getHospitalizationDateTo());

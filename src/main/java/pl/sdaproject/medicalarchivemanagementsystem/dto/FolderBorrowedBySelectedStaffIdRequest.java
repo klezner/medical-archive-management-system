@@ -5,8 +5,7 @@ import lombok.Getter;
 import javax.validation.constraints.NotNull;
 
 @Getter
-public class FolderWithSelectedFolderStatusRequest {
-
+public class FolderBorrowedBySelectedStaffIdRequest {
     @NotNull
-    private String folderStatusLabel;
+    private Long staffId;
 }

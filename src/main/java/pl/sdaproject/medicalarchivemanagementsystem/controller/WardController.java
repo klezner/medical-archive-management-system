@@ -4,12 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.sdaproject.medicalarchivemanagementsystem.dto.AddressRequest;
-import pl.sdaproject.medicalarchivemanagementsystem.dto.AddressResponse;
 import pl.sdaproject.medicalarchivemanagementsystem.dto.WardRequest;
 import pl.sdaproject.medicalarchivemanagementsystem.dto.WardResponse;
 import pl.sdaproject.medicalarchivemanagementsystem.mapper.WardMapper;
-import pl.sdaproject.medicalarchivemanagementsystem.model.Address;
 import pl.sdaproject.medicalarchivemanagementsystem.model.Ward;
 import pl.sdaproject.medicalarchivemanagementsystem.service.WardService;
 
@@ -70,7 +67,6 @@ public class WardController {
         }
     }
 
-
     @PutMapping
     public ResponseEntity<WardResponse> editWard(@RequestBody @Valid WardRequest request) {
         final Ward ward = wardService.updateWard(
@@ -82,5 +78,4 @@ public class WardController {
                 .status(HttpStatus.OK)
                 .body(wardMapper.mapWardToWardResponse(ward));
     }
-
 }

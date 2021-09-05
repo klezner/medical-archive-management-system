@@ -2,9 +2,11 @@ package pl.sdaproject.medicalarchivemanagementsystem.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.sdaproject.medicalarchivemanagementsystem.model.Hospitalization;
+import pl.sdaproject.medicalarchivemanagementsystem.model.Ward;
 import pl.sdaproject.medicalarchivemanagementsystem.repository.HospitalizationRepository;
+import pl.sdaproject.medicalarchivemanagementsystem.model.Hospitalization;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -36,5 +38,17 @@ public class HospitalizationService {
     public List<Hospitalization> fetchAllHospitalizationsByDates(LocalDate hospitalizationFrom, LocalDate hospitalizationTo) {
 
         return hospitalizationRepository.findAllByHospitalizationFromIsBetweenOrHospitalizationToIsBetween(hospitalizationFrom, hospitalizationTo, hospitalizationFrom, hospitalizationTo);
+    }
+
+    @Transactional
+    public Hospitalization updateHospitalization(Long id, LocalDate hospitalizationFrom, LocalDate hospitalizationTo, Ward ward) {
+        final Hospitalization hospitalization = hospitalizationRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Hospitalization with id: " + id + " not found"));
+
+        hospitalization.setWard(ward);
+        hospitalization.setHospitalizationFrom(hospitalizationFrom);
+        hospitalization.setHospitalizationTo(hospitalizationTo);
+        return hospitalizationRepository.save(hospitalization);
+
     }
 }

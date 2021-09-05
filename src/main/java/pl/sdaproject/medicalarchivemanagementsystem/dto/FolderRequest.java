@@ -30,8 +30,6 @@ public class FolderRequest {
     private Long archiveCategoryId;
     @NotNull
     private Long locationId;
-    //    @NotNull
-    //    private Long hospitalizationId;
     @NotNull(message = "Date can't be null")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate hospitalizationDateFrom;

@@ -22,7 +22,7 @@ public class Patient {
     private String firstName;
     @NotBlank(message = "Last name can't be null")
     private String lastName;
-    @PESEL(message = "Wrong pesel")
+    @PESEL(message = "Incorrect pesel")
     private String pesel;
     @OneToOne
     private Address address;

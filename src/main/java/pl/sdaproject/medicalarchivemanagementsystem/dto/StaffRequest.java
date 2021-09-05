@@ -15,12 +15,12 @@ import javax.validation.constraints.NotNull;
 public class StaffRequest {
 
     private Long id;
-    @NotBlank
+    @NotBlank(message = "Name can't be null")
     private String name;
-    @NotBlank
+    @NotBlank(message = "Surname can't be null")
     private String surname;
-    @NotNull
+    @NotNull(message = "Role can't be null")
     private Role role;
-    @NotNull
+    @NotNull(message = "Ward can't be null")
     private Long wardId;
 }
