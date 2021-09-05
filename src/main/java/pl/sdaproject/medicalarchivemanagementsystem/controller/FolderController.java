@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.sdaproject.medicalarchivemanagementsystem.dto.*;
 import pl.sdaproject.medicalarchivemanagementsystem.mapper.FolderMapper;
-import pl.sdaproject.medicalarchivemanagementsystem.mapper.HospitalizationMapper;
 import pl.sdaproject.medicalarchivemanagementsystem.model.*;
 import pl.sdaproject.medicalarchivemanagementsystem.service.ArchiveCategoryService;
 import pl.sdaproject.medicalarchivemanagementsystem.service.FolderService;
@@ -23,7 +22,6 @@ import java.util.stream.Collectors;
 @RequestMapping(path = "/folder")
 public class FolderController {
 
-    private final HospitalizationMapper hospitalizationMapper;
     private final LocationService locationService;
     private final HospitalizationService hospitalizationService;
     private final ArchiveCategoryService archiveCategoryService;
