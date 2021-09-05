@@ -5,7 +5,7 @@ import lombok.Getter;
 import javax.validation.constraints.NotNull;
 
 @Getter
-public class FolderWithArchiveCategoryIdRequest {
+public class FolderWithArchiveCategoryRequest {
     @NotNull
     private Long archiveCategoryId;
 }

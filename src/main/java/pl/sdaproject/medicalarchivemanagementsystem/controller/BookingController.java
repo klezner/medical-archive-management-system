@@ -8,6 +8,7 @@ import pl.sdaproject.medicalarchivemanagementsystem.dto.*;
 import pl.sdaproject.medicalarchivemanagementsystem.mapper.BookingMapper;
 import pl.sdaproject.medicalarchivemanagementsystem.mapper.FolderMapper;
 import pl.sdaproject.medicalarchivemanagementsystem.model.*;
+import pl.sdaproject.medicalarchivemanagementsystem.mapper.BookingMapper;
 import pl.sdaproject.medicalarchivemanagementsystem.service.BookingService;
 import pl.sdaproject.medicalarchivemanagementsystem.service.FolderService;
 import pl.sdaproject.medicalarchivemanagementsystem.service.StaffService;
