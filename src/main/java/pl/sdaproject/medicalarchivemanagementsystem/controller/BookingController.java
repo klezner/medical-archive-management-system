@@ -4,10 +4,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.sdaproject.medicalarchivemanagementsystem.dto.*;
+import pl.sdaproject.medicalarchivemanagementsystem.dto.BookingRequest;
+import pl.sdaproject.medicalarchivemanagementsystem.dto.BookingResponse;
+import pl.sdaproject.medicalarchivemanagementsystem.dto.FolderBorrowedBySelectedStaffIdRequest;
+import pl.sdaproject.medicalarchivemanagementsystem.dto.FolderResponse;
 import pl.sdaproject.medicalarchivemanagementsystem.mapper.BookingMapper;
 import pl.sdaproject.medicalarchivemanagementsystem.mapper.FolderMapper;
-import pl.sdaproject.medicalarchivemanagementsystem.model.*;
+import pl.sdaproject.medicalarchivemanagementsystem.model.Booking;
+import pl.sdaproject.medicalarchivemanagementsystem.model.FolderStatus;
+import pl.sdaproject.medicalarchivemanagementsystem.model.Staff;
 import pl.sdaproject.medicalarchivemanagementsystem.service.BookingService;
 import pl.sdaproject.medicalarchivemanagementsystem.service.StaffService;
 
@@ -74,7 +79,7 @@ public class BookingController {
         }
     }
 
-    @PostMapping(path = "/booking")
+    @PostMapping(path = "/booking/borrowedByStaff")
     public ResponseEntity<List<FolderResponse>> getAllFoldersBorrowedBySelectedStaffId(@RequestBody @Valid FolderBorrowedBySelectedStaffIdRequest request) {
         final Staff staff = staffService.fetchStaff(request.getStaffId());
 

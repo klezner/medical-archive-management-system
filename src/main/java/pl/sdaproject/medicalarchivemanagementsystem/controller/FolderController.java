@@ -95,7 +95,7 @@ public class FolderController {
                 .body(folderMapper.mapFolderToFolderResponse(folder));
     }
 
-    @PostMapping(path = "/folder")
+    @PostMapping(path = "/folder/archiveCategory")
     public ResponseEntity<List<FolderResponse>> getAllFoldersWithArchiveCategoryId(@RequestBody @Valid FolderWithArchiveCategoryRequest request) {
         final ArchiveCategory archiveCategory = archiveCategoryService.fetchArchiveCategory(request.getArchiveCategoryId());
 
@@ -114,7 +114,7 @@ public class FolderController {
         }
     }
 
-    @PostMapping(path = "/folder")
+    @PostMapping(path = "/folder/status")
     public ResponseEntity<List<FolderResponse>> getAllFoldersWithSelectedFolderStatus(@RequestBody @Valid FolderWithSelectedFolderStatusRequest request) {
         final FolderStatus folderStatus = FolderStatus.valueOf(request.getFolderStatusLabel());
 
@@ -133,7 +133,7 @@ public class FolderController {
         }
     }
 
-    @PostMapping(path = "/folder")
+    @PostMapping(path = "/folder/location")
     public ResponseEntity<List<FolderResponse>> getAllFoldersWithLocation(@RequestBody @Valid FolderWithLocationRequest request) {
         final Location location = locationService.fetchLocation(request.getLocationId());
 
@@ -152,7 +152,7 @@ public class FolderController {
         }
     }
 
-    @PostMapping(path = "/folder")
+    @PostMapping(path = "/folder/patient")
     public ResponseEntity<List<FolderResponse>> getAllFoldersWithPatient(@RequestBody @Valid FolderWithPatientPeselOrNameAndSurnameRequest request) {
         final Patient patient = patientService.fetchPatientWithPeselOrNameAndSurname(
                 request.getPesel(),
@@ -176,7 +176,7 @@ public class FolderController {
         }
     }
 
-    @PostMapping(path = "/folder")
+    @PostMapping(path = "/folder/type")
     public ResponseEntity<List<FolderResponse>> getAllFoldersWithSelectedFolderType(@RequestBody @Valid FolderWithSelectedFolderTypeRequest request) {
         final FolderType folderType = FolderType.valueOf(request.getFolderTypeLabel());
 
@@ -195,7 +195,7 @@ public class FolderController {
         }
     }
 
-    @PostMapping(path = "/folder")
+    @PostMapping(path = "/folder/patientAndHospitalization")
     public ResponseEntity<List<FolderResponse>> getAllFoldersWithPatientAndHospitalization(@RequestBody @Valid FolderWithPatientAndHospitalizationDatesRequest request) {
         final List<Hospitalization> hospitalizations = hospitalizationService.fetchAllHospitalizationsByDates(request.getHospitalizationDateFrom(), request.getHospitalizationDateTo());
 
