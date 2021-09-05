@@ -80,9 +80,4 @@ public class FolderService {
 
         return folderRepository.findByLocation(location);
     }
-
-    public List<Folder> fetchAllFoldersWithPatient(Patient patient) {
-
-        return folderRepository.findByPatient(patient);
-    }
 }

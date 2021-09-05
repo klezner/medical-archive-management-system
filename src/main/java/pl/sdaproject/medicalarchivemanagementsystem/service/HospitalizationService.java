@@ -2,10 +2,11 @@ package pl.sdaproject.medicalarchivemanagementsystem.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.sdaproject.medicalarchivemanagementsystem.repository.HospitalizationRepository;
 import pl.sdaproject.medicalarchivemanagementsystem.model.Hospitalization;
+import pl.sdaproject.medicalarchivemanagementsystem.repository.HospitalizationRepository;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -27,6 +28,13 @@ public class HospitalizationService {
     }
 
     public Hospitalization fetchHospitalization(Long id) {
-        return hospitalizationRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Hospitalization with id: " + id + " not found"));
+
+        return hospitalizationRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Hospitalization with id: " + id + " not found"));
+    }
+
+    public List<Hospitalization> fetchAllHospitalizationsByDates(LocalDate hospitalizationFrom, LocalDate hospitalizationTo) {
+
+        return hospitalizationRepository.findAllByHospitalizationFromIsBetweenOrHospitalizationToIsBetween(hospitalizationFrom, hospitalizationTo, hospitalizationFrom, hospitalizationTo);
     }
 }
