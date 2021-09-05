@@ -180,4 +180,23 @@ public class FolderController {
                             .collect(Collectors.toList()));
         }
     }
+
+    @PostMapping(path = "folderType")
+    public ResponseEntity<List<FolderResponse>> getAllFoldersWithSelectedFolderType(@RequestBody @Valid FolderWithSelectedFolderTypeRequest request) {
+        final FolderType folderType = FolderType.valueOf(request.getFolderTypeLabel());
+
+        final List<Folder> folders = folderService.fetchAllFoldersWithSelectedFolderType(folderType);
+
+        if (folders.size() == 0) {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(new ArrayList<>());
+        } else {
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(folders.stream()
+                    .map(folderMapper::mapFolderToFolderResponse)
+                    .collect(Collectors.toList()));
+        }
+    }
 }

@@ -55,9 +55,16 @@ public class FolderService {
 
         return folderRepository.findByStatus(folderStatus);
     }
+
+    public List<Folder> fetchAllFoldersWithSelectedFolderType(FolderType folderType) {
+
+        return folderRepository.findByType(folderType);
+    }
   
     @Transactional
-    public Folder updateFolder(Long id, Integer year, Integer ledgerId, Integer numberOfFolders, String typeLabel, String statusLabel, Long archiveCategoryId, Long locationId, LocalDate hospitalizationDateFrom, LocalDate hospitalizationDateTo, Long patientId) {
+    public Folder updateFolder(Long id, Integer year, Integer ledgerId, Integer numberOfFolders, String
+            typeLabel, String statusLabel, Long archiveCategoryId, Long locationId, LocalDate
+                                       hospitalizationDateFrom, LocalDate hospitalizationDateTo, Long patientId) {
         final Folder folder = folderRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Folder with id: " + id + " not found"));
 

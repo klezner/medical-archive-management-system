@@ -13,6 +13,8 @@ public interface FolderRepository extends JpaRepository<Folder, Long> {
 
     List<Folder> findByStatus(FolderStatus folderStatus);
 
+    List<Folder> findByType(FolderType folderType);
+ 
     List<Folder> findByLocation(Location location);
 
     List<Folder> findByPatient(Patient patient);
