@@ -155,7 +155,7 @@ public class FolderController {
                             .collect(Collectors.toList()));
         }
     }
-
+  
     @PostMapping(path = "/patient")
     public ResponseEntity<List<FolderResponse>> getAllFoldersWithPatient(@RequestBody @Valid FolderWithPatientPeselOrNameAndSurnameRequest request) {
         final Patient patient = patientService.fetchPatientWithPeselOrNameAndSurname(
@@ -197,6 +197,28 @@ public class FolderController {
                     .body(folders.stream()
                     .map(folderMapper::mapFolderToFolderResponse)
                     .collect(Collectors.toList()));
+        }
+    }
+  
+    @PostMapping(path = "/patientandhospitalization")
+    public ResponseEntity<List<FolderResponse>> getAllFoldersWithPatientAndHospitalization(@RequestBody @Valid FolderWithPatientAndHospitalizationDatesRequest request) {
+        final List<Hospitalization> hospitalizations = hospitalizationService.fetchAllHospitalizationsByDates(request.getHospitalizationDateFrom(), request.getHospitalizationDateTo());
+
+        final List<Folder> folders = hospitalizations.stream()
+                .flatMap(hospitalization -> hospitalization.getFolders().stream()
+                        .filter(folder -> folder.getPatient().getId() == request.getPatientId()))
+                .collect(Collectors.toList());
+
+        if (folders.size() == 0) {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(new ArrayList<>());
+        } else {
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(folders.stream()
+                            .map(folderMapper::mapFolderToFolderResponse)
+                            .collect(Collectors.toList()));
         }
     }
 }
